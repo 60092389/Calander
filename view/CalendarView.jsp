@@ -161,8 +161,11 @@
 					</a>
 
 				</div>
-				<%@ include file="./popup.jsp"%>
+			</div>
+		</div>
+	</section>
 
-				<%@ include file="footer.jsp"%>
+	<%@ include file="./popup.jsp"%>
+	<%@ include file="./footer.jsp"%>
 </body>
 </html>
