@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="servlet.controler.UserControler"%>
+<%@ page import ="DAO.UserDAO" %>
+<%@ page import="DTO.User" %>
+<%@ page import="Util.Util" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +14,26 @@
 <title>S-Calendar</title>
 </head>
 <body>
-		<div class="portfolio-modal modal fade" id="Login" tabindex="-1" role="dialog" aria-hidden="true">
+
+<% 
+		String title = Util.JOIN;
+		String type = Util.JOIN;
+		String SessionId = null;
+		String valueId = "";
+		String valueName = "";
+		
+		UserDAO popUserDao = new UserDAO();
+		UserControler popcontroler = new UserControler();
+		User popUser = popcontroler.isSession(request,popUserDao);
+	
+		if (popUser != null) {	
+			title = Util.USERUPDATE;
+			type = Util.USERUPDATE;
+			valueId = popUser.getU_id();
+			valueName = popUser.getName() ;
+		} 	
+%>
+		<div class="portfolio-modal modal fade" id=<%=Util.LOGIN%> tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-content">
 			<div class="close-modal" data-dismiss="modal">
 				<div class="lr">
@@ -24,7 +47,7 @@
 							<h2>Login</h2>
 							<hr class="star-primary">
 
-							<form class="form-horizontal" name="sentMessage" id="loginForm" method="post" action ="">
+							<form class="form-horizontal" name="sentMessage" id="loginForm" method="post" action ="UserControler.do?type=<%=Util.LOGIN%>">
 							
 								<div class="form-group">
 									<label for="inputId" class="col-lg-2 control-label">Id</label>
@@ -55,7 +78,7 @@
 		</div>
 	</div>
 	
-	<div class="portfolio-modal modal fade" id="signup" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="portfolio-modal modal fade" id="<%=Util.JOIN%>" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-content">
 			<div class="close-modal" data-dismiss="modal">
 				<div class="lr">
@@ -66,21 +89,21 @@
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-2">
 						<div class="modal-body">
-							<h2>Sign up</h2>
+							<h2>Join</h2>
 							<hr class="star-primary">
 
-							<form class="form-horizontal" name="sentMessage" id="contactForm" method="post">
+							<form class="form-horizontal" name="sentMessage" id="contactForm" method="post" action ="UserControler.do?type=<%=Util.JOIN%>">
 	
 									<div class="row form-group">
 									<label for="inputEmail" class="col-lg-2 control-label">Id</label>
 									<div class="col-lg-10">
-										<input type="text" class="form-control" id="inputEmail" name = "inputEmail" placeholder="ID" >
+										<input type="text" class="form-control" id="inputSignupId" name = "inputSignupId" placeholder="ID" >
 									</div>
 								</div>
 								<div class="row form-group">
 									<label for="inputPassword" class="col-lg-2 control-label">Password</label>
 									<div class="col-lg-10">
-										<input type="password" class="form-control" id="inputPassword" name = "inputPassword"
+										<input type="password" class="form-control" id="inputSignupPassword" name = "inputSignupPassword"
 											placeholder="Password" >
 									</div>
 								</div>
@@ -88,21 +111,21 @@
 								<div class="row form-group">
 									<label for="inputPassword" class="col-lg-2 control-label">Confirm </label>
 									<div class="col-lg-10">
-										<input type="password" class="form-control" id="inputPasswordConfirm" name = "inputPasswordConfirm"
+										<input type="password" class="form-control" id="inputSignupPasswordConfirm" name = "inputSignupPasswordConfirm"
 											placeholder="Password Confirm"  >
 									</div>
 								</div>
 								<div class="row form-group">
 									<label for="inputName" class="col-lg-2 control-label">Name</label>
 									<div class="col-lg-10">
-										<input type="text" class="form-control" id="inputName" name = "inputName"  placeholder="Name" >
+										<input type="text" class="form-control" id="inputSignupName" name = "inputSignupName"  placeholder="Name" >
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-xs-12">
 								
-										<button type="submit" class="btn btn-success btn-lg">join</button>
-										<button type="reset" class="btn btn-danger btn-lg">cancel</button>
+										<button type="submit" class="btn btn-success btn-lg">Join</button>
+										<button type="reset" class="btn btn-danger btn-lg">Cancel</button>
 
 									</div>
 								</div>
@@ -114,6 +137,7 @@
 		</div>
 	</div>
 	
+
 
 </body>
 </html>
