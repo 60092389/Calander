@@ -27,8 +27,20 @@
 <title>S-Calendar</title>
 </head>
 <body id="page-top" class="index">
+
 	<!-- navigator include -->
 	<%@ include file="./navigator.jsp" %>
+	
+	<%
+		if (user != null) {
+	%>
+	<jsp:forward page="UserControler.do">
+		<jsp:param value="<%=Util.SESSION%>" name="type"/>
+		<jsp:param value="<%=user.getU_id()%>" name="id"/>
+	</jsp:forward>
+	<%
+		}
+	%>
 	
 	 <!-- Content -->
     <header>
