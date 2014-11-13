@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="servlet.controler.UserControler"%>
+<%@page import="DAO.UserDAO"%>
+<%@page import="DTO.User"%>
+<%@page import="Util.Util"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,6 +30,28 @@
 <title>S-Calendar</title>
 </head>
 <body id="page-top" class="index">
+
+<%
+
+	String navbarTitle1 = Util.LOGIN;
+	String navbarTitle2 = Util.JOIN;
+	String formPath1 = "#"+Util.LOGIN;
+	String formPath2 = "#"+Util.JOIN;
+	
+	UserControler controler = new UserControler();
+	UserDAO userDao = new UserDAO(); 
+	User user = controler.isSession(request,userDao);
+	
+
+	if (user != null) {
+		
+		navbarTitle1 = Util.LOGOUT;
+		navbarTitle2 = Util.USERUPDATE;
+		
+		formPath1 = "UserControler.do?type="+navbarTitle1;
+		
+	}
+%>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,10 +63,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">              
                     <li class="page-scroll">
-                        <a href= #Login class="portfolio-link" data-toggle="modal">Login</a>
+                        <a href= <%=formPath1%> class="portfolio-link" data-toggle="modal"><%=navbarTitle1%></a>
                     </li>
                     <li class="page-scroll">
-                        <a href= join.jsp class="portfolio-link" data-toggle="modal">Join</a>
+                        <a href= <%=formPath2%> class="portfolio-link" data-toggle="modal"><%=navbarTitle2 %></a>
                         
                     </li>
                 </ul>
