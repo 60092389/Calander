@@ -137,7 +137,62 @@
 		</div>
 	</div>
 	
+	<div class="calendar-modal modal fade" id="addschedule" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-content">
+			<div class="close-modal" data-dismiss="modal">
+				<div class="lr">
+					<div class="rl"></div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2">
+						<div class="modal-body">
+							<h2>Add Schedule</h2>
+							<hr class="star-primary">
 
+							<form class="form-horizontal" name="addSchedule" id="addSchedule" method="post" action ="CalendarConroller.go">
+
+									<div class="row form-group">
+									<label for="inputTitle" class="col-lg-2 control-label">TITLE</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="inputTitle" name = "inputTitle" placeholder="TITLE" >
+									</div>
+								</div>
+								
+								<div class="row form-group">
+									<label for="inputDate" class="col-lg-2 control-label">PICK DATE</label>
+									<div class="col-lg-10">
+										<input type="date" class="form-control" id="inputDay" name = "inputDay"	placeholder="DAY" >
+									</div>
+								</div>
+								
+								<div class="row form-group">
+      								<label for="inputText" class="col-lg-2 control-label">CONTENTS</label>
+      								<div class="col-lg-10">
+        							<textarea class="form-control" rows="4" id="inputContents" name="inputContents" form="addSchedule"></textarea>
+      								</div>
+    								</div>
+								
+								
+								<div class="row">
+									<div class="form-group col-xs-12" align = "center">
+								
+										<button type="submit" class="btn btn-success btn-lg">등록</button>
+										<button type="reset" class="btn btn-danger btn-lg">취소</button>
+
+									</div>
+								</div>
+								
+								<input type="hidden" name="whatRequest" value="addSchedule">
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>
