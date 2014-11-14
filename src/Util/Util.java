@@ -18,7 +18,8 @@ public class Util {
 	public static final String USERUPDATE = "User Update";
 	public static final String USERCU  = "User Create/Update";
 	public static final String SESSION = "session";
-	
+	public static final String FRIENDS = "Friends";
+	public static final String ADDFRIENDS = "AddFriends";
 	public static final String MAINPATH = "index.jsp";
 	public static final String ERRORPATH = "error.jsp";
 	public static final String CALENDARPATH = "CalendarView.jsp";
@@ -27,6 +28,8 @@ public class Util {
 	public static final String USERTYPE = "type";
 
 	public static final String USERID = "id";
+
+	public static final String ADDSCHEDULE = null;
 
 
 
