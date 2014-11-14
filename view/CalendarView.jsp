@@ -45,7 +45,7 @@
 			year = Integer.parseInt(input_year);
 		}
 		if (input_month != null) {
-			month = Integer.parseInt(input_month);
+			month = Integer.parseInt(input_month) - 1;
 		}
 
 		cr.set(year, month, 1);
