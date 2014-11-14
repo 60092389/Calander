@@ -35,8 +35,15 @@
 
 	String navbarTitle1 = Util.LOGIN;
 	String navbarTitle2 = Util.JOIN;
+	
+	String navbarTitle3 = "";
+	String navbarTitle4 = "";
+	
 	String formPath1 = "#"+Util.LOGIN;
 	String formPath2 = "#"+Util.JOIN;
+	
+	String formPath3 = "#"+Util.FRIENDS;	
+	String formPath4 = "#"+Util.ADDFRIENDS;
 	
 	UserControler controler = new UserControler();
 	UserDAO userDao = new UserDAO(); 
@@ -47,6 +54,8 @@
 		
 		navbarTitle1 = Util.LOGOUT;
 		navbarTitle2 = Util.USERUPDATE;
+		navbarTitle3 = Util.FRIENDS;
+		navbarTitle4 = Util.ADDFRIENDS;
 		
 		formPath1 = "UserControler.do?type="+navbarTitle1;
 		
@@ -61,7 +70,13 @@
 						
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">              
+                <ul class="nav navbar-nav navbar-right">        
+                    <li class="page-scroll">
+                        <a href= <%=formPath3%> class="portfolio-link" data-toggle="modal"><%=navbarTitle3%></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href= <%=formPath4%> class="portfolio-link" data-toggle="modal"><%=navbarTitle4%></a>
+                    </li>
                     <li class="page-scroll">
                         <a href= <%=formPath1%> class="portfolio-link" data-toggle="modal"><%=navbarTitle1%></a>
                     </li>
