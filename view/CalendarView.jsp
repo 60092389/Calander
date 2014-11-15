@@ -45,7 +45,7 @@
 			year = Integer.parseInt(input_year);
 		}
 		if (input_month != null) {
-			month = Integer.parseInt(input_month) - 1;
+			month = Integer.parseInt(input_month)-1;
 		}
 
 		cr.set(year, month, 1);
@@ -68,7 +68,7 @@
 			</div>
 			<div class="row">
 
-				<form method="post" action="" name="change">
+				<form method="post" action="CalendarController.go" name="change">
 					<table width="400" cellpadding="2" cellspacing="0" border="0"
 						align="center">
 
