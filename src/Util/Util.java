@@ -9,6 +9,7 @@ public class Util {
 	public static final String LOGINQUERY = "SELECT * FROM User WHERE u_id =? AND password=?";
 	public static final String CREATEUSERQUERY = "INSERT INTO User (u_id, password, name) VALUES(?,?,?)";
 	public static final String HASUSERID = "SELECT * FROM User WHERE u_id = ?";
+	public static final String ADDSCHEDULE = "INSERT INTO Schedule (title, year, month, day, content, userid) VALUES (?,?,?,?,?,?)";
 	
 	
 	public static final String ADMIN = "admin";
@@ -29,7 +30,6 @@ public class Util {
 
 	public static final String USERID = "id";
 
-	public static final String ADDSCHEDULE = null;
 
 
 
