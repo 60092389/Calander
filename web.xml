@@ -9,6 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
   <servlet>
     <description></description>
     <display-name>UserControler</display-name>
@@ -20,6 +21,19 @@
     <url-pattern>/UserControler</url-pattern>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>CalendarController</display-name>
+    <servlet-name>CalendarController</servlet-name>
+    <servlet-class>servlet.controler.CalendarController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CalendarController</servlet-name>
+    <url-pattern>/CalendarController</url-pattern>
+    <url-pattern>*.go</url-pattern>
+  </servlet-mapping>
+
    <filter>
     <display-name>ServletFilter</display-name>
     <filter-name>ServletFilter</filter-name>
@@ -30,6 +44,7 @@
     <url-pattern>/ServletFilter</url-pattern>
      <url-pattern>*</url-pattern>
   </filter-mapping>
+  
   <resource-ref>
   	<description>DB Connection</description>
   	<res-ref-name>jdbc/SCalendar</res-ref-name>
