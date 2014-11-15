@@ -49,14 +49,16 @@
 	UserDAO userDao = new UserDAO(); 
 	User user = controler.isSession(request,userDao);
 	
-
 	if (user != null) {
 		
 		navbarTitle1 = Util.LOGOUT;
 		navbarTitle2 = Util.USERUPDATE;
-		navbarTitle3 = Util.FRIENDS;
-		navbarTitle4 = Util.ADDFRIENDS;
 		
+		if(!user.getU_id().equals(Util.ADMIN))
+		{
+			navbarTitle3 = Util.FRIENDS;
+			navbarTitle4 = Util.ADDFRIENDS;
+		}
 		formPath1 = "UserControler.do?type="+navbarTitle1;
 		
 	}
