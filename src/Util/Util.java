@@ -12,7 +12,7 @@ public class Util {
 	public static final String ADDSCHEDULE = "INSERT INTO Schedule (title, year, month, day, content, userid) VALUES (?,?,?,?,?,?)";
 	
 	
-	public static final String ADMIN = "admin";
+	public static final String ADMIN = "Admin";
 	public static final String LOGIN = "Login";
 	public static final String JOIN = "Join";
 	public static final String LOGOUT = "Logout";
@@ -21,14 +21,23 @@ public class Util {
 	public static final String SESSION = "session";
 	public static final String FRIENDS = "Friends";
 	public static final String ADDFRIENDS = "AddFriends";
+	public static final String SCHEDULEDELETE = "scheduleDelete";
+	
 	public static final String MAINPATH = "index.jsp";
 	public static final String ERRORPATH = "error.jsp";
 	public static final String CALENDARPATH = "CalendarView.jsp";
 	public static final String ADMINPATH = "AdminView.jsp";
+	public static final String DETAILVIEWPATH = "ViewSchedule.jsp";
 	
 	public static final String USERTYPE = "type";
 
 	public static final String USERID = "id";
+
+	public static final String SCHEDUALLIST = "SELECT content, day,month, title, year, s_id FROM Schedule "
+								+ "WHERE year=? AND month=? AND userid=?";
+
+	public static final String GETSCHEDULE = "SELECT * FROM schedule WHERE s_id=?";
+
 
 
 

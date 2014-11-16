@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
+<%@ page import="DTO.Schedule" %>
+<%@ page import="DAO.ScheduleDAO"%>
 <!DOCTYPE HTML >
 <html>
 <head>
@@ -11,7 +13,7 @@
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom css -->
-<link href="../css/calendar.css" rel="stylesheet">
+<link href="../css/freelancer.css" rel="stylesheet">
 
 <!-- font  -->
 <link href="../font-custom/css/font-awesome.min.css" rel="stylesheet"
@@ -35,17 +37,24 @@
 		int year = cr.get(Calendar.YEAR);
 		int month = cr.get(Calendar.MONTH);
 		int date = cr.get(Calendar.DATE);
+		ScheduleDAO  sd = new ScheduleDAO();
 
 		String today = year + ":" + (month + 1) + ":" + date;
 
 		String input_year = request.getParameter("year");
 		String input_month = request.getParameter("month");
-
+		ArrayList<ArrayList<Schedule>> user_Schedule = (ArrayList<ArrayList<Schedule>>)request.getAttribute("schedules");
 		if (input_year != null) {
 			year = Integer.parseInt(input_year);
 		}
 		if (input_month != null) {
 			month = Integer.parseInt(input_month)-1;
+		}
+		if(user_Schedule == null){
+			
+			user_Schedule = new ArrayList<ArrayList<Schedule>>();
+			
+			user_Schedule = sd.getNullSchedules();
 		}
 
 		cr.set(year, month, 1);
@@ -55,6 +64,7 @@
 		int startDay = cr.get(Calendar.DAY_OF_WEEK);
 
 		int count = 0;
+		ArrayList<Schedule> dailySchedule;
 	%>
 	<!-- About Section -->
 	<section id="about">
@@ -68,14 +78,14 @@
 			</div>
 			<div class="row">
 
-				<form method="post" action="CalendarController.go" name="change">
+				<form method="post" action="CalendarControler.go" name="change">
 					<table width="400" cellpadding="2" cellspacing="0" border="0"
 						align="center">
 
 						<tr>
 							<td width="140" align="right"><input type="button" value="◁"
 								onClick="monthDown(this.form)" class="btn btn-default"></td>
-							<td width="120" align="center"><select name="year"
+							<td width="110" align="center"><select name="year"
 								onchange="selectCheck(this.form)">
 
 									<%
@@ -86,8 +96,7 @@
 													+ " style=background:" + color + ">" + i + "</option>");
 										}
 									%>
-							</select><select name="month" onchange="selectCheck(this.form)"
-								class="col-lg-2 control-label">
+							</select><select name="month" onchange="selectCheck(this.form)">
 									<%
 										for (int i = 1; i <= 12; i++) {
 											String selected = (i == month + 1) ? "selected" : "";
@@ -101,7 +110,7 @@
 								onClick="monthUp(this.form)" class="btn btn-default"></td>
 						</tr>
 						<tr>
-							<td align="right" colspan="3"><a href="./CalendarView.jsp"><font
+							<td align="right" colspan="3"><a href="./index.jsp"><font
 									size="2">오늘 : <%=today%></font></a></td>
 						</tr>
 					</table>
@@ -135,7 +144,26 @@
 								count++;
 						%>
 						<td bgcolor="<%=bgcolor%>"><font size="2" color=<%=color%>><%=i%></font>
-
+						<%
+							dailySchedule = user_Schedule.get(i);
+							  
+							ListIterator<Schedule> it = dailySchedule.listIterator();
+							  
+							while(it.hasNext()){
+								  
+							Schedule sc = it.next();
+						    if(sc.getContents()==null){
+						    	continue;
+							}
+							%> <br />
+						<form id="contact-form" action="CalendarControler.go" method="post">
+    						<input type="hidden" name="whatRequest" value="viewdetail" />
+    						<input type="hidden" name="scheduleid" value="<%=sc.getS_id() %>" />
+							<input type="submit" value="<%=sc.getTitle()%>" />
+						</form>
+							<%
+								}
+							%>
 						</td>
 						<%
 							if (count % 7 == 0 && i < endDate) {
