@@ -24,13 +24,13 @@
   
   <servlet>
     <description></description>
-    <display-name>CalendarController</display-name>
-    <servlet-name>CalendarController</servlet-name>
-    <servlet-class>servlet.controler.CalendarController</servlet-class>
+    <display-name>CalendarControler</display-name>
+    <servlet-name>CalendarControler</servlet-name>
+    <servlet-class>servlet.controler.CalendarControler</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CalendarController</servlet-name>
-    <url-pattern>/CalendarController</url-pattern>
+    <servlet-name>CalendarControler</servlet-name>
+    <url-pattern>/CalendarControler</url-pattern>
     <url-pattern>*.go</url-pattern>
   </servlet-mapping>
 
