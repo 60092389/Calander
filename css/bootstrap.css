@@ -2298,12 +2298,14 @@ legend {
   color: #2c3e50;
   border: 0;
   border-bottom: 1px solid transparent;
+  font-weight: bold;
 }
 label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #000;
 }
 input[type="search"] {
   -webkit-box-sizing: border-box;

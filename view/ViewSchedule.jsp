@@ -35,6 +35,8 @@ System.out.println("at view schedule : "+date);
 %>
 <%@ include file="./navigator.jsp" %>
  <header>
+ 				<div class="backgro">
+ 				<div class="container">
         <div class="showdetail">
         <br>
 <form class="form-horizontal" method ="post">
@@ -43,28 +45,28 @@ System.out.println("at view schedule : "+date);
     <legend>Schedule Detail</legend>
     <div class="form-group">
       <label for="inputDefault" class="col-lg-2 control-label">Title</label>
-      <div class="col-lg-10">
+      <div class="col-lg-9">
         <input type="text" class="form-control"  id="inputTitle" name="inputTitle" value = "<%=schedule.getTitle() %>" >
       </div>
     </div>
     
     <div class="form-group">
       <label for="inputDefault" class="col-lg-2 control-label">Scheduled Date </label>
-      <div class="col-lg-10">
+      <div class="col-lg-9">
         <input type="date" class="form-control" id="inputDay" name="inputDay" value=<%=date %> >
       </div>
     </div>
     
     <div class="form-group">
       <label for="textArea" class="col-lg-2 control-label">Contents</label>
-      <div class="col-lg-10">
+      <div class="col-lg-9">
         <textarea class="form-control" rows="3" id="inputContents" name="inputContents"><%=schedule.getContents() %></textarea>
       </div>
     </div>
    
 
     <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
+      <div class="col-lg-10 col-lg-offset-1">
         <a href=<%=Util.MAINPATH %> class="btn btn-default">확인</a>
         <button type="submit" class="btn btn-primary">수정</button>
         <a href="CalendarController.go?type=<%=Util.SCHEDULEDELETE%>&scheduleId=<%=schedule.getS_id() %>" class="btn btn-warning" data-toggle="modal"> 일정삭제 </a>
@@ -76,7 +78,11 @@ System.out.println("at view schedule : "+date);
   
 </form>
 </div>
+</div>
+</div>
 </header>
+
+<%@ include file="./footer.jsp" %>
 
 </body>
 </html>
