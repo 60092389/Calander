@@ -38,6 +38,31 @@ public class CalendarControler extends SharedControler{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("doGet Start");
+
+		if (request.getParameter("type").equals(Util.SCHEDULEDELETE))
+		{
+			System.out.println("controler schedule delete in");
+			int scheduleid = Integer.parseInt(request.getParameter("scheduleid"));
+			System.out.println("!get"+scheduleid);
+			User user = null;
+
+			scheduleDAO.deleteSchedule(scheduleid);
+
+			UserDAO userDAO = new UserDAO();
+			try {
+				user = isSession(request, userDAO);
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			goPage(request, response, Util.CALENDARPATH, user);
+
+		} else
+		{
+			doPost(request, response);
+		}
 		
 	}
 

@@ -69,7 +69,7 @@ System.out.println("at view schedule : "+date);
       <div class="col-lg-10 col-lg-offset-1">
         <a href=<%=Util.MAINPATH %> class="btn btn-default">확인</a>
         <button type="submit" class="btn btn-primary">수정</button>
-        <a href="CalendarController.go?type=<%=Util.SCHEDULEDELETE%>&scheduleId=<%=schedule.getS_id() %>" class="btn btn-warning" data-toggle="modal"> 일정삭제 </a>
+        <a href="CalendarController.go?type=<%=Util.SCHEDULEDELETE%>&scheduleid=<%=schedule.getS_id() %>" class="btn btn-warning" data-toggle="modal"> 일정삭제 </a>
       </div>
     </div>
   </fieldset>
