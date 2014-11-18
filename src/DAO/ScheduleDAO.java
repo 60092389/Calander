@@ -80,8 +80,7 @@ public class ScheduleDAO extends JDBC {
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		finally {
+		}finally {
 			closeDB(conn, stmt, rs);
 		}
 		return schedules;
@@ -127,6 +126,7 @@ public class ScheduleDAO extends JDBC {
 			rs = stmt.executeQuery();
 			if(rs.next()){
 				System.out.println("get single schedule ok");
+				schedule.setS_id(rs.getInt("s_id"));
 				schedule.setTitle(rs.getString("title"));
 				schedule.setContents(rs.getString("content"));
 				schedule.setDay(rs.getString("day"));
@@ -141,8 +141,33 @@ public class ScheduleDAO extends JDBC {
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}finally {
+			closeDB(conn, stmt, rs);
+		}
 		return schedule;
+	}
+
+	public boolean deleteSchedule(int scheduleid) throws NamingException {
+		// TODO Auto-generated method stub
+		System.out.println("delete schedule start");
+		boolean deleteOk = false;
+		
+		try {
+			conn = getconnection(conn);
+			stmt = conn.prepareStatement(Util.DELETESCHEDULE);
+			stmt.setInt(1, scheduleid);
+			
+			int count = stmt.executeUpdate();
+			if(count > 0){
+				System.out.println("schedule delete ok");
+				deleteOk = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("delete schedule query fail");
+			e.printStackTrace();
+		}		
+		return deleteOk;
 	}
 
 }
