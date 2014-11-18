@@ -76,7 +76,7 @@ public class UserDAO extends JDBC{
 		return user;
 	}
 
-	public boolean createUser(User user) throws NamingException, ClassNotFoundException, SQLException {			
+	public boolean createUser(User user) throws NamingException, ClassNotFoundException{			
 		
 		
 		
@@ -114,7 +114,7 @@ public class UserDAO extends JDBC{
 		return isOk;
 	}
 	
-	public ArrayList<User> getAllUsers()
+	public ArrayList<User> getAllUsers() throws NamingException
 	{
 		System.out.println("get all users start");
 		ArrayList<User> allUsers = null;			// 모들 user 리스트릴 TreeMap 으로 반환하기 위한 변수 
@@ -146,7 +146,7 @@ public class UserDAO extends JDBC{
 				allUsers.add(user);
 
 			}
-		} catch (SQLException | NamingException e)
+		} catch (SQLException e)
 		{
 			System.out.println("hasUser Query fail");
 			System.out.println("error " + e);
@@ -158,6 +158,29 @@ public class UserDAO extends JDBC{
 		//System.out.println("size : " + allUsers.size());
 		return allUsers;
 
+	}
+
+	public boolean deleteUser(int deleteId) throws NamingException {
+		// TODO Auto-generated method stub
+		boolean deleteUserOk = false;
+		
+		try {
+			conn = getconnection(conn);
+			stmt = conn.prepareStatement(Util.DELETEUSER);
+			stmt.setInt(1, deleteId);
+			int count = stmt.executeUpdate();
+			if(count > 0){
+				System.out.println("user delete ok");
+				deleteUserOk = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB(conn, stmt, rs);
+		}
+		
+		return deleteUserOk;
 	}
 	
 

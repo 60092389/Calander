@@ -10,7 +10,7 @@ public class Util {
 	public static final String CREATEUSERQUERY = "INSERT INTO User (u_id, password, name) VALUES(?,?,?)";
 	public static final String HASUSERID = "SELECT * FROM User WHERE u_id = ?";
 	public static final String ADDSCHEDULE = "INSERT INTO Schedule (title, year, month, day, content, userid) VALUES (?,?,?,?,?,?)";
-	public static final String DELETEUSER = "DELETE FROM user WHERE u_id = ?";//11.18 16:02
+	public static final String DELETEUSER = "DELETE FROM user WHERE n_id = ?";//11.18 16:02/ 22 15 다시수정
 	public static final String DELETESCHEDULE = "DELETE FROM Schedule WHERE s_id=?";//11.18 17:22 스케쥴삭제
 	
 	public static final String ADMIN = "Admin";
