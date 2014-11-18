@@ -1,5 +1,6 @@
 package DAO;
 
+
 import java.sql.*;
 
 import javax.naming.*;
@@ -7,6 +8,8 @@ import javax.sql.*;
 
 import DTO.User;
 import Util.Util;
+
+import java.util.ArrayList;
 
 public class UserDAO extends JDBC{	
 	public UserDAO(){
@@ -110,5 +113,54 @@ public class UserDAO extends JDBC{
 		}
 		return isOk;
 	}
+	
+	public ArrayList<User> getAllUsers()
+	{
+		System.out.println("get all users start");
+		ArrayList<User> allUsers = null;			// 모들 user 리스트릴 TreeMap 으로 반환하기 위한 변수 
+
+		try
+		{
+			conn = getconnection(conn);
+			stmt = conn.prepareStatement(Util.ALLUSERS);
+			rs = stmt.executeQuery();
+
+
+			// user에 대한 정보가 있는 경우 (모든 user list 정보를 받아온다) 
+			while (rs.next())
+			{
+				System.out.println("get all user query ok");
+				// 모든 user list 정보를 받는 객체가 없는 경우
+				if (allUsers == null)
+				{
+					allUsers = new ArrayList<User>();
+				}
+
+				User user = new User();
+
+				user.setN_id(rs.getString("n_id"));
+				user.setU_id(rs.getString("u_id"));
+				user.setPassword(rs.getString("password"));
+				user.setName(rs.getString("name"));
+
+				allUsers.add(user);
+
+			}
+		} catch (SQLException | NamingException e)
+		{
+			System.out.println("hasUser Query fail");
+			System.out.println("error " + e);
+
+		} finally
+		{
+			closeDB(conn, stmt, rs);
+		}
+		//System.out.println("size : " + allUsers.size());
+		return allUsers;
+
+	}
+	
+
+
 
 }
