@@ -39,4 +39,8 @@ public class Util {
 
    public static final String GETSCHEDULE = "SELECT * FROM schedule WHERE s_id=?";
    public static final String ALLUSERS = "SELECT * FROM user ORDER BY n_id ASC";//11.18 오전 12:41 추가 어드민뷰에 유저들불러올때 사용
+	
+	public static final String HASFRIENDID = "SELECT * FROM friends where u_id=?";
+
+	public static final String FINDFRIENDQUERY = "SELECT * FROM friends where f_id=?";
 }

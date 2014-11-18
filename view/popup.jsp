@@ -232,50 +232,34 @@
 								id="contactForm" method="post"
 								action="UserControler.do?type=<%%>">
 
-								<table id="friendstable" width="600" align="center" border="1">
+								<table id="friendstableview" width="600" align="center"
+									border="1">
+									<tbody>
+										<div class="row form-group">
+											<tr>
+												<td width="300"><label for="friendsidsch"
+													class="col-lg-2 control-label">ID</label></td>
+												<td width="150"><label for="friendsshowsch"
+													class="col-lg-2 control-label">show</label></td>
+												<td width="150"><label for="friendsdeletesch"
+													class="col-lg-2 control-label">delete</label></td>
+											</tr>
+										</div>
 
-									<tr>
-										<td width="300">
-											<div class="row form-group">
-												<label for="friendsidsch" class="col-lg-2 control-label">ID</label>
-											</div>
-										</td>
-										<td width="150">
-											<div class="row form-group">
-												<label for="friendsshowsch" class="col-lg-2 control-label">view</label>
-											</div>
-										</td>
-										<td width="150">
-											<div class="row form-group">
-												<label for="friendsdeletesch" class="col-lg-2 control-label">delete</label>
-											</div>
-										</td>
-									</tr>
-
-								</table>
-								
-								<table id="friendstableview" width="600" align="center" border="1">
-
-									<tr>
-										<td width="300">
-											<div class="row form-group">
-												<label for="friendsid" class="col-lg-2 control-label"></label>
-											</div>
-										</td>
-										<td width="150">
-											<div class="row form-group">
-												<label for="friendsshow" class="col-lg-2 control-label">
-												<input type = "submit" class = "btn btn-success btn-lg" value = "view"></label>
-											</div>
-										</td>
-										<td width="150">
-											<div class="row form-group">
-												<label for="friendsdelete" class="col-lg-2 control-label">
-												<input type = "submit" class = "btn btn-danger btn-lg" value = "delete"></label>
-											</div>
-										</td>
-									</tr>
-
+										<div class="row form-group">
+											<tr>
+												<c:forEach var="friend" items="${friends.list}">
+													<td width="300"><c:out value="${friend.f_id}" /></td>
+													<td width="150"><a
+														href="friend?op=show&id=${friend.f_id}"
+														class="btn btn-default btn-m">show</a></td>
+													<td width="150"><a
+														href="friend?op=delete&id=${friend.f_id}"
+														class="btn btn-default btn-m">delete</a></td>
+												</c:forEach>
+											</tr>
+										</div>
+									</tbody>
 								</table>
 							</form>
 						</div>
@@ -284,6 +268,55 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="portfolio-modal modal fade" id=<%=Util.ADDFRIENDS%>
+		tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-content">
+			<div class="close-modal" data-dismiss="modal">
+				<div class="lr">
+					<div class="rl"></div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2">
+						<div class="modal-body">
+							<h2>AddFriend</h2>
+							<hr class="star-primary">
+
+							<form class="form-horizontal" name="addfriends" id="addfriends"
+								method="post"
+								action="UserControler.do?type=<%=Util.ADDFRIENDS%>">
+
+								<table class="table table-bordered table-stripped">
+									<thead>
+										<tr>
+											<td><input type="text" class="form-control"
+												id="inputFriendId" name="inputFriendId" placeholder="Friend"></td>
+											<td><button type="submit" class="btn btn-success btn-m">search</button></td>
+										</tr>
+									<tbody>
+										<c:forEach var="user" items="${users.list}">
+											<tr>
+												<td><a href="user?n_id=${user.n_id}"><c:out
+															value="${user.u_id}" /></a></td>
+												<td><a href="user?op=Add&id=${user.u_id}"
+													class="btn btn-default btn-m">Add</a>
+											</tr>
+										</c:forEach>
+									</tbody>
+
+								</table>
+							</form>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 </body>
 </html>
