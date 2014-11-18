@@ -17,8 +17,7 @@ public class Util {
 	public static final String LOGIN = "Login";
 	public static final String JOIN = "Join";
 	public static final String LOGOUT = "Logout";
-	public static final String USERUPDATE = "User Update";
-	public static final String USERCU  = "User Create/Update";
+	public static final String USERUPDATE = "UserUpdate";
 	public static final String SESSION = "session";
 	public static final String FRIENDS = "Friends";
 	public static final String ADDFRIENDS = "AddFriends";
@@ -44,6 +43,8 @@ public class Util {
 	public static final String HASFRIENDID = "SELECT * FROM friends where u_id=?";
 	
 	public static final String FINDFRIENDQUERY = "SELECT * FROM friends where f_id=?";
+
+	public static final String SCHEDULEUPDATE = "UPDATE schedule SET title=?, year=?, month=?, day=?, content=? WHERE s_id=?";
 
 
 
