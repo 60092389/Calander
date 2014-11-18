@@ -92,12 +92,12 @@
 							
 						
 							<td>
-							<%-- 	<% if(!allUsers.get(i).getU_id().equals(Util.ADMIN)){ %>
-	  						 <a href="UserControler.do?type=<%=Util.SHOWCALENDARBTN%>&<%=Util.USERID%>=<%=allUsers.get(i).getU_id()%>" class="btn btn-warning" data-toggle="modal"> <%=Util.SHOWCALENDARBTN%> </a>
-								 <a href="UserControler.do?type=<%=Util.USERDELETEBTN%>&<%=Util.USERID%>=<%=allUsers.get(i).getU_id()%>" class="btn btn-warning" data-toggle="modal"> <%=Util.USERDELETEBTN%> </a>
+							<% if(!allUsers.get(i).getU_id().equals(Util.ADMIN)){ %>
+								 <a href="UserControler.do?type=<%=Util.USERDELETEBTN%>&<%=Util.USERID%>=<%=allUsers.get(i).getU_id()%>"
+								  class="btn btn-warning" data-toggle="modal"> <%=Util.USERDELETEBTN%> </a>
 								<%
 								}
-								%>   --%>
+								%>
 							
 						 </td>
 						</tr>
