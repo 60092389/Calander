@@ -170,32 +170,4 @@ public class ScheduleDAO extends JDBC {
 		return deleteOk;
 	}
 
-	public boolean updateSchedule(Schedule schedule, int id) throws NamingException {
-		// TODO Auto-generated method stub
-		boolean updatScheduleOk = false;
-		
-		try {
-			conn = getconnection(conn);
-			stmt = conn.prepareStatement(Util.SCHEDULEUPDATE);
-			stmt.setString(1, schedule.getTitle());
-			stmt.setString(2, schedule.getYear());
-			stmt.setString(3, schedule.getMonth());
-			stmt.setString(4, schedule.getDay());
-			stmt.setString(5, schedule.getContents());
-			stmt.setInt(6, id);
-			
-			int count = stmt.executeUpdate();
-			if(count > 0){
-				System.out.println("update schedule query ok");
-				updatScheduleOk = true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("update schedule query fail");
-			e.printStackTrace();
-		}
-		
-		return updatScheduleOk;
-	}
-
 }

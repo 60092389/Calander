@@ -16,22 +16,25 @@
 <body>
 
 	<%
-		String title = Util.JOIN;
-		String type = Util.JOIN;
-		String SessionId = null;
-		String valueId = "";
-		String valueName = "";
 
-		UserDAO popUserDao = new UserDAO();
-		UserControler popcontroler = new UserControler();
-		User popUser = popcontroler.isSession(request, popUserDao);
+	String SessionId = null;
+	String valueNid = "";
+	String valueId = "";
+	String valueName = "";
+	String valuePw = "";
+	
+	UserDAO popUserDao = new UserDAO();
+	UserControler popcontroler = new UserControler();
+	User popUser = popcontroler.isSession(request, popUserDao);
 
-		if (popUser != null) {
-			title = Util.USERUPDATE;
-			type = Util.USERUPDATE;
-			valueId = popUser.getU_id();
-			valueName = popUser.getName();
-		}
+	if (popUser != null) 
+	{
+		valueNid = popUser.getN_id();
+		valueId = popUser.getU_id();
+		valueName = popUser.getName();
+		valuePw = popUser.getPassword();
+	}
+
 	%>
 	<div class="portfolio-modal modal fade" id=<%=Util.LOGIN%>
 		tabindex="-1" role="dialog" aria-hidden="true">
@@ -138,6 +141,74 @@
 									<div class="form-group col-xs-12">
 
 										<button type="submit" class="btn btn-success btn-lg">Join</button>
+										<button type="reset" class="btn btn-danger btn-lg">Cancel</button>
+
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="portfolio-modal modal fade" id="<%=Util.USERUPDATE %>"
+		tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-content">
+			<div class="close-modal" data-dismiss="modal">
+				<div class="lr">
+					<div class="rl"></div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2">
+						<div class="modal-body">
+							<h2>Update</h2>
+							<hr class="star-primary">
+
+							<form class="form-horizontal" name="sentMessage" id="contactForm"
+								method="post" action="UserControler.do?type=<%=Util.USERUPDATE%>">
+
+								<div class="row form-group">
+									<label for="inputEmail" class="col-lg-2 control-label">Id</label>
+									<div class="col-lg-10">
+										<label for="inputId" class="col-lg-2 control-label"><%=valueId%></label>
+									</div>
+								</div>
+								<div class="row form-group">
+									<label for="inputName" class="col-lg-2 control-label">Name</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											id="inputUpdateName" name="inputUpdateName"
+											placeholder=<%=valueName %> value = <%=valueName %>>
+									</div>
+								</div>
+								<div class="row form-group">
+									<label for="inputPassword" class="col-lg-2 control-label">Password</label>
+									<div class="col-lg-10">
+										<input type="password" class="form-control"
+											id="inputUpdatePassword" name="inputUpdatePassword"
+											placeholder=<%=valuePw %> value = <%=valuePw%>>
+									</div>
+								</div>
+
+								<div class="row form-group">
+									<label for="inputPassword" class="col-lg-2 control-label">Confirm
+									</label>
+									<div class="col-lg-10">
+										<input type="password" class="form-control"
+											id="inputUpdatePasswordConfirm"
+											name="inputUpdatePasswordConfirm"
+											placeholder=<%=valuePw %> value = <%=valuePw%>>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="form-group col-xs-12">
+										<input type="hidden" id="userid" name="userid" value=<%=valueNid%>>
+										<button type="submit" class="btn btn-success btn-lg">Update</button>
 										<button type="reset" class="btn btn-danger btn-lg">Cancel</button>
 
 									</div>
