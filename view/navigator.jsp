@@ -35,13 +35,11 @@
 
 	String navbarTitle1 = Util.LOGIN;
 	String navbarTitle2 = Util.JOIN;
-	
 	String navbarTitle3 = "";
 	String navbarTitle4 = "";
 	
 	String formPath1 = "#"+Util.LOGIN;
 	String formPath2 = "#"+Util.JOIN;
-	
 	String formPath3 = "#"+Util.FRIENDS;	
 	String formPath4 = "#"+Util.ADDFRIENDS;
 	
@@ -60,6 +58,7 @@
 			navbarTitle4 = Util.ADDFRIENDS;
 		}
 		formPath1 = "UserControler.do?type="+navbarTitle1;
+		formPath2 = "#"+Util.USERUPDATE;
 		
 	}
 %>
@@ -82,8 +81,8 @@
                     <li class="page-scroll">
                         <a href= <%=formPath1%> class="portfolio-link" data-toggle="modal"><%=navbarTitle1%></a>
                     </li>
-                    <li class="page-scroll">
-                        <a href= <%=formPath2%> class="portfolio-link" data-toggle="modal"><%=navbarTitle2 %></a>
+                    <li class="page-scroll">                    
+                        <a href= <%=formPath2 %> class="portfolio-link" data-toggle="modal"><%=navbarTitle2 %></a>
                         
                     </li>
                 </ul>

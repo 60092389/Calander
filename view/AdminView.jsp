@@ -39,7 +39,7 @@
 
 	<%
 	ArrayList<User> allUsers = null ;  				// user list 를 담는 객체
-	allUsers = userDao.getAllUsers(); 				// 모든 user list를 받는다 
+	allUsers = userDao.getAllUsers();					// 모든 user list를 받는다 
 	%>
 
 	
@@ -49,7 +49,7 @@
 			<div class="row">
 			<div class="col-md-12 page-info">
 				<div class="pull-left">
-					Total <b><%=allUsers.size() %></b> users
+					Total <b>${users.numItems }</b> users
 				</div>
 				<div class="pull-right">
 					<b>${users.page }</b> page / total <b>${users.numPages }</b> pages
@@ -93,7 +93,7 @@
 						
 							<td>
 							<% if(!allUsers.get(i).getU_id().equals(Util.ADMIN)){ %>
-								 <a href="UserControler.do?type=<%=Util.USERDELETEBTN%>&<%=Util.USERID%>=<%=allUsers.get(i).getN_id()%>"
+								 <a href="UserControler.do?type=<%=Util.USERDELETEBTN%>&<%=Util.USERID%>=<%=allUsers.get(i).getU_id()%>"
 								  class="btn btn-warning" data-toggle="modal"> <%=Util.USERDELETEBTN%> </a>
 								<%
 								}
