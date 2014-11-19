@@ -81,7 +81,7 @@ hr.star-primary:after {
 
 header {
     text-align: center;
-    color: #fff;
+    color: #000;
     background: #18bc9c;
 }
 
@@ -467,4 +467,15 @@ header .showdetail{
    padding-top: 100px;
     padding-bottom: 50px;
     background-color: #fff;
+}
+
+table.table thead th {
+	background-color: #2c3e50;
+	color:#fff;
+	text-align: center;
+}
+
+.table tbody td{
+	background-color : white;
+}
 }
