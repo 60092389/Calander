@@ -19,7 +19,9 @@ p.small {
 a,
 a:hover,
 a:focus,
-a:active,
+a:active,bootstrap.css
+bootstrap.min.css
+freelancer.css
 a.active {
     outline: 0;
     color: #18bc9c;
@@ -477,5 +479,4 @@ table.table thead th {
 
 .table tbody td{
 	background-color : white;
-}
 }
