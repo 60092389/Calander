@@ -53,9 +53,11 @@
 		navbarTitle2 = Util.USERUPDATE;
 		
 		if(!user.getU_id().equals(Util.ADMIN))
-		{
+		{			
 			navbarTitle3 = Util.FRIENDS;
 			navbarTitle4 = Util.ADDFRIENDS;
+		}else{
+			navbarTitle2 = "";
 		}
 		formPath1 = "UserControler.do?type="+navbarTitle1;
 		formPath2 = "#"+Util.USERUPDATE;
