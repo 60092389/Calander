@@ -50,7 +50,8 @@ public class SharedControler extends HttpServlet{
 
 		// user를 사용하는 calendar view에 대한 경로일 경우
 		if (path.equals(Util.CALENDARPATH))
-		{			
+		{		
+			new CalendarControler(request, response, user);
 			if (user != null)
 			{
 				request.setAttribute(Util.USER, user);
