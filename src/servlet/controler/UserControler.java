@@ -43,6 +43,14 @@ public class UserControler extends SharedControler {
 		} else if (type.equals(Util.LOGOUT)) {
 			removeSession(request);
 			goPage(request, response, Util.MAINPATH);
+		}else if (type.equals(Util.USERDELETEBTN)){
+			System.out.println("user delete called");
+			try {
+				deleteUser(request, response);
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -91,7 +99,24 @@ public class UserControler extends SharedControler {
 		} else if (type.equals(Util.USERUPDATE)) {
 			System.out.println("user update called");
 			updateUser(request, response);
+		} 
+	}
+
+	private void deleteUser(HttpServletRequest request,
+			HttpServletResponse response) throws NamingException, ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("delete user start");
+		UserDAO userDao = new UserDAO();
+		int id = Integer.parseInt(request.getParameter(Util.USERID));
+		
+		if(userDao.deleteUser(id)){
+			System.out.println("delete user ok");
+			goPage(request, response, Util.ADMINPATH);
+		}else{
+			System.out.println("delete user fail");
+			goPage(request, response, Util.ERRORPATH);
 		}
+		
 	}
 
 	private void loginUser(HttpServletRequest request,

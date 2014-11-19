@@ -161,6 +161,49 @@ public class CalendarControler extends SharedControler{
 			}
 			request.setAttribute("singleSchedule", singleSchedule);
 			goPage(request, response, Util.DETAILVIEWPATH);
+		}else if(type.equals("updateSchedule")){
+						System.out.println("update schedule start");
+						
+						int id = Integer.parseInt(request.getParameter("scheduleId"));
+						Schedule schedule = new Schedule();
+						String title = request.getParameter("inputTitle");
+						String day = request.getParameter("inputDay");
+						String contents = request.getParameter("inputContents");
+						
+						SimpleDateFormat transFormat = new SimpleDateFormat(
+								"yyyy-MM-dd");
+						Date date = null;
+						try {
+							date = transFormat.parse(day);
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(date);
+						
+						schedule.setTitle(title);
+						System.out.println("!!"+cal.get(cal.YEAR)+cal.get(cal.MONTH)+
+								cal.get(cal.DAY_OF_MONTH));
+						
+						schedule.setYear(String.valueOf(cal.get(cal.YEAR)));
+						schedule.setMonth(String.valueOf(cal.get(cal.MONTH)+1));
+						schedule.setDay(String.valueOf(cal.get(cal.DAY_OF_MONTH)));
+						schedule.setContents(contents);
+						
+						try {
+							if(scheduleDAO.updateSchedule(schedule, id)){
+								System.out.println("schedule update ok");
+								goPage(request, response, Util.MAINPATH);
+							}else{
+								System.out.println("schedule update fail");
+								goPage(request, response, Util.ERRORPATH);
+							}
+						} catch (NamingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 		}
 	}
 

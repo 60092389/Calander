@@ -5,6 +5,7 @@ import java.sql.*;
 import javax.naming.*;
 import javax.sql.*;
 
+import DTO.Schedule;
 import DTO.User;
 import Util.Util;
 
@@ -76,8 +77,7 @@ public class UserDAO extends JDBC {
 		return user;
 	}
 
-	public boolean createUser(User user) throws NamingException,
-			ClassNotFoundException, SQLException {
+	public boolean createUser(User user) throws NamingException, ClassNotFoundException{
 
 		boolean createOk = false;
 
@@ -113,7 +113,7 @@ public class UserDAO extends JDBC {
 		return isOk;
 	}
 
-	public ArrayList<User> getAllUsers() {
+	public ArrayList<User> getAllUsers() throws NamingException{
 		System.out.println("get all users start");
 		ArrayList<User> allUsers = null; // 모들 user 리스트릴 TreeMap 으로 반환하기 위한 변수
 
@@ -140,7 +140,7 @@ public class UserDAO extends JDBC {
 				allUsers.add(user);
 
 			}
-		} catch (SQLException | NamingException e) {
+		} catch (SQLException e) {
 			System.out.println("hasUser Query fail");
 			System.out.println("error " + e);
 
@@ -202,5 +202,5 @@ public class UserDAO extends JDBC {
 		}
 
 		return deleteUserOk;
-	}
+	}	
 }
