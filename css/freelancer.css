@@ -19,9 +19,7 @@ p.small {
 a,
 a:hover,
 a:focus,
-a:active,bootstrap.css
-bootstrap.min.css
-freelancer.css
+a:active,
 a.active {
     outline: 0;
     color: #18bc9c;
