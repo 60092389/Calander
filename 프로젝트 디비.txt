@@ -1,8 +1,8 @@
--DB»ý¼º
+-DBÂ»Ã½Â¼Âº
 create database SCalendar;
 
 
--Table »ý¼º
+-Table Â»Ã½Â¼Âº
 CREATE TABLE user(
  n_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
  u_id VARCHAR(255) NOT NULL UNIQUE,
@@ -12,7 +12,7 @@ CREATE TABLE user(
 
 CREATE TABLE Schedule(
  s_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
- title VARCHAR(255) NOT NULL UNIQUE,
+ title VARCHAR(255) NOT NULL,
  content VARCHAR(1000) NOT NULL,
  year VARCHAR(100) NOT NULL,
  month VARCHAR(100) NOT NULL,
