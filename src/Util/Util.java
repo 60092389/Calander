@@ -25,12 +25,14 @@ public class Util {
 	public static final String ADDFRIENDS = "AddFriends";
 	public static final String SCHEDULEDELETE = "scheduleDelete";
 	public static final String USERDELETEBTN = "User Delete";//11.18오후 3:49분에 추가 유저삭제버튼에 필요
+	public static final String REQUEST = "friend request"; // 11-20 01:02 친구 요청에 필요
 	
 	public static final String MAINPATH = "index.jsp";
 	public static final String ERRORPATH = "error.jsp";
 	public static final String CALENDARPATH = "CalendarView.jsp";
 	public static final String ADMINPATH = "AdminView.jsp";
 	public static final String DETAILVIEWPATH = "ViewSchedule.jsp";
+	public static final String SEARCHVIEW = "SearchView.jsp";
 	
 	public static final String USERTYPE = "type";
 
@@ -47,5 +49,6 @@ public class Util {
 	public static final String FINDFRIENDQUERY = "SELECT * FROM friends where f_id=?";
 
 	public static final String SCHEDULEUPDATE = "UPDATE schedule SET title=?, year=?, month=?, day=?, content=? WHERE s_id=?";
+
 
 }

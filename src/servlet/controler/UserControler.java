@@ -99,7 +99,26 @@ public class UserControler extends SharedControler {
 		} else if (type.equals(Util.USERUPDATE)) {
 			System.out.println("user update called");
 			updateUser(request, response);
-		} 
+		} else if (type.equals(Util.ADDFRIENDS)){
+			System.out.println("add friends called");
+			try {
+				searchFriend(request,response);
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void searchFriend(HttpServletRequest request,
+			HttpServletResponse response) throws NamingException, ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("search friend start");
+		String searchId = request.getParameter("inputFriendId");
+		UserDAO userDao = new UserDAO();
+		User friend = userDao.getUser(searchId);
+		request.setAttribute("friend", friend);
+		goPage(request, response, Util.SEARCHVIEW);		
 	}
 
 	private void deleteUser(HttpServletRequest request,

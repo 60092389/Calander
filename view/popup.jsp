@@ -319,15 +319,7 @@
 
 										<div class="row form-group">
 											<tr>
-												<c:forEach var="friend" items="${friends.list}">
-													<td width="300"><c:out value="${friend.f_id}" /></td>
-													<td width="150"><a
-														href="friend?op=show&id=${friend.f_id}"
-														class="btn btn-default btn-m">show</a></td>
-													<td width="150"><a
-														href="friend?op=delete&id=${friend.f_id}"
-														class="btn btn-default btn-m">delete</a></td>
-												</c:forEach>
+												
 											</tr>
 										</div>
 									</tbody>
@@ -356,25 +348,16 @@
 							<hr class="star-primary">
 
 							<form class="form-horizontal" name="addfriends" id="addfriends"
-								method="post"
-								action="UserControler.do?type=<%=Util.ADDFRIENDS%>">
+								method="post" action="UserControler.do?type=<%=Util.ADDFRIENDS%>">
 
 								<table class="table table-bordered table-stripped">
 									<thead>
 										<tr>
 											<td><input type="text" class="form-control"
-												id="inputFriendId" name="inputFriendId" placeholder="Friend"></td>
+												id="inputFriendId" name="inputFriendId" placeholder="Insert Friend ID"></td>
 											<td><button type="submit" class="btn btn-success btn-m">search</button></td>
 										</tr>
-									<tbody>
-										<c:forEach var="user" items="${users.list}">
-											<tr>
-												<td><a href="user?n_id=${user.n_id}"><c:out
-															value="${user.u_id}" /></a></td>
-												<td><a href="user?op=Add&id=${user.u_id}"
-													class="btn btn-default btn-m">Add</a>
-											</tr>
-										</c:forEach>
+									<tbody>								
 									</tbody>
 
 								</table>
