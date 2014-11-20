@@ -51,7 +51,7 @@
 						
 						</tbody>
 					</table>
-					<a href="<%=Util.MAINPATH %>" class="btn btn-primary btn">돌아가기</a>
+					<a href="<%=Util.MAINPATH %>" class="btn btn-default btn">돌아가기</a>
 				</div>
 			</section>
 		</div>
