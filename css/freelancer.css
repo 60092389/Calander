@@ -478,3 +478,8 @@ table.table thead th {
 .table tbody td{
 	background-color : white;
 }
+
+button, html input[type="submit"]{
+	width : 130px;
+	font-size : 8pt;
+}
