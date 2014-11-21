@@ -1,6 +1,7 @@
 package servlet.controler;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -43,7 +44,7 @@ public class UserControler extends SharedControler {
 		} else if (type.equals(Util.LOGOUT)) {
 			removeSession(request);
 			goPage(request, response, Util.MAINPATH);
-		}else if (type.equals(Util.USERDELETEBTN)){
+		} else if (type.equals(Util.USERDELETEBTN)) {
 			System.out.println("user delete called");
 			try {
 				deleteUser(request, response);
@@ -99,10 +100,10 @@ public class UserControler extends SharedControler {
 		} else if (type.equals(Util.USERUPDATE)) {
 			System.out.println("user update called");
 			updateUser(request, response);
-		} else if (type.equals(Util.ADDFRIENDS)){
+		} else if (type.equals(Util.ADDFRIENDS)) {
 			System.out.println("add friends called");
 			try {
-				searchFriend(request,response);
+				searchFriend(request, response);
 			} catch (NamingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -111,31 +112,38 @@ public class UserControler extends SharedControler {
 	}
 
 	private void searchFriend(HttpServletRequest request,
-			HttpServletResponse response) throws NamingException, ServletException, IOException {
+			HttpServletResponse response) throws NamingException,
+			ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("search friend start");
 		String searchId = request.getParameter("inputFriendId");
 		UserDAO userDao = new UserDAO();
 		User friend = userDao.getUser(searchId);
 		request.setAttribute("friend", friend);
-		goPage(request, response, Util.SEARCHVIEW);		
+		goPage(request, response, Util.SEARCHVIEW);
 	}
 
 	private void deleteUser(HttpServletRequest request,
-			HttpServletResponse response) throws NamingException, ServletException, IOException {
+			HttpServletResponse response) throws NamingException,
+			ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("delete user start");
 		UserDAO userDao = new UserDAO();
 		int id = Integer.parseInt(request.getParameter(Util.USERID));
-		
-		if(userDao.deleteUser(id)){
+
+		if (userDao.deleteUser(id)) {
 			System.out.println("delete user ok");
 			goPage(request, response, Util.ADMINPATH);
-		}else{
+		} else {
 			System.out.println("delete user fail");
-			goPage(request, response, Util.ERRORPATH);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('delete user not valid');</script>");
+			out.flush();
+			//에러팝업창
+			// goPage(request, response, Util.ERRORPATH);
 		}
-		
+
 	}
 
 	private void loginUser(HttpServletRequest request,
@@ -163,11 +171,21 @@ public class UserControler extends SharedControler {
 				goPage(request, response, Util.MAINPATH);
 			} else {
 				System.out.println("longin failed");
-				goPage(request, response, Util.ERRORPATH);
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('login not valid');</script>");
+				out.flush();
+			
+				// goPage(request, response, Util.ERRORPATH);
 			}
 		} else {
 			System.out.println("longin failed");
-			goPage(request, response, Util.ERRORPATH);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('login not valid');</script>");
+			out.flush();
+			
+			// goPage(request, response, Util.ERRORPATH);
 		}
 	}
 
@@ -201,8 +219,17 @@ public class UserControler extends SharedControler {
 
 				goPage(request, response, Util.MAINPATH);
 			} else {
-				goPage(request, response, Util.ERRORPATH);
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('create not valid');</script>");
+				out.flush();
+				// goPage(request, response, Util.ERRORPATH);
 			}
+		} else {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('create not valid');</script>");
+			out.flush();
 		}
 	}
 
@@ -266,7 +293,11 @@ public class UserControler extends SharedControler {
 
 					// 사용자의 정보 수정이 실패한 경우
 				} else {
-					goPage(request, response, Util.ERRORPATH);
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>alert('update user not valid');</script>");
+					out.flush();
+					// goPage(request, response, Util.ERRORPATH);
 				}
 			} catch (ClassNotFoundException | NamingException | SQLException e) {
 				// TODO Auto-generated catch block
@@ -275,7 +306,11 @@ public class UserControler extends SharedControler {
 
 			// 사용자가 입력한 비밀번호가 일치하지 않는 경우
 		} else {
-			goPage(request, response, Util.ERRORPATH);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('update user not valid');</script>");
+			out.flush();
+			// goPage(request, response, Util.ERRORPATH);
 		}
 	}
 }

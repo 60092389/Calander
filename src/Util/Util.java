@@ -19,7 +19,7 @@ public class Util {
 	public static final String JOIN = "Join";
 	public static final String LOGOUT = "Logout";
 	public static final String USERUPDATE = "UserUpdate";
-	
+	//error삭제
 	public static final String SESSION = "session";
 	public static final String FRIENDS = "Friends";
 	public static final String ADDFRIENDS = "AddFriends";
@@ -28,7 +28,6 @@ public class Util {
 	public static final String REQUEST = "friend request"; // 11-20 01:02 친구 요청에 필요
 	
 	public static final String MAINPATH = "index.jsp";
-	public static final String ERRORPATH = "error.jsp";
 	public static final String CALENDARPATH = "CalendarView.jsp";
 	public static final String ADMINPATH = "AdminView.jsp";
 	public static final String DETAILVIEWPATH = "ViewSchedule.jsp";
