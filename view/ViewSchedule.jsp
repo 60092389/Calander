@@ -24,7 +24,7 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="./js/bootstrap.min.js"></script>
-<title>SCalendar</title>
+<title>S-Calendar</title>
 </head>
 <body>
 <%

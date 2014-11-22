@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>S-Calendar</title>
 </head>
 <body>
 	<%@include file="./navigator.jsp"%>
@@ -28,7 +28,7 @@
 						<tbody>
 							<%
 								//찾는 친구 가 존재 한다면 
-								if(friend != null && !friend.getU_id().equals(Util.ADMIN)) { 
+								if(friend != null && !friend.getU_id().equals(Util.ADMIN) && !friend.getU_id().equals(user.getU_id())) { 
 								// 친구를 출력한다.						
 							%>
 							
@@ -37,7 +37,7 @@
 								<td><%=friend.getName()%></td>
 								<td>
 									<a
-									href="UserControler.do?type=<%=Util.REQUEST%>&<%=Util.USERID%>=<%=friend.getN_id()%>"
+									href="UserControler.do?type=<%=Util.REQUEST%>&<%=Util.FID%>=<%=friend.getN_id()%>&<%=Util.USERID%>=<%=user.getN_id() %>"
 									class="btn btn-warning" data-toggle="modal"> 요청하기</a> 
 								</td>
 							</tr>
@@ -47,8 +47,7 @@
 							<tr class="success">							
 								<td colspan="3"><h3>찾는 친구가 없습니다.</h3></td>								
 							</tr>
-							<%} %>
-						
+							<%} %>						
 						</tbody>
 					</table>
 					<a href="<%=Util.MAINPATH %>" class="btn btn-default btn">돌아가기</a>
