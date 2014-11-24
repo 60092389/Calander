@@ -73,13 +73,15 @@
 						
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">        
+                <ul class="nav navbar-nav navbar-right">
+                <%if(user != null)  {%>      
                     <li class="page-scroll">
                         <a href= <%=formPath3%> class="portfolio-link" data-toggle="modal"><%=navbarTitle3%></a>
                     </li>
                     <li class="page-scroll">
                         <a href= <%=formPath4%> class="portfolio-link" data-toggle="modal"><%=navbarTitle4%></a>
                     </li>
+               <%  }%>
                     <li class="page-scroll">
                         <a href= <%=formPath1%> class="portfolio-link" data-toggle="modal"><%=navbarTitle1%></a>
                     </li>
