@@ -1,11 +1,15 @@
 package DAO;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.*;
 import javax.sql.*;
 
 import DTO.Friends;
+import DTO.Request;
+import DTO.User;
 import Util.Util;
 
 public class FriendDAO extends JDBC {
@@ -38,7 +42,7 @@ public class FriendDAO extends JDBC {
 	//친구목록을 가져옴.
 	
 	public boolean findFriend(Friends friend) throws NamingException,
-			ClassNotFoundException, SQLException {
+			ClassNotFoundException {
 
 		boolean findOk = false;
 
@@ -73,4 +77,88 @@ public class FriendDAO extends JDBC {
 		return isOk;
 	}
 	//친구추가할시 친구목록에 있을 시 에러.
+
+	public boolean insertRequest(int r_id, int u_id) throws NamingException {
+		// TODO Auto-generated method stub
+		System.out.println("insert request start");
+		boolean insertRequstOk = false;
+		
+		try {
+			conn = getconnection(conn);
+			stmt = conn.prepareStatement(Util.INSERTREQ);
+			stmt.setInt(1, r_id);
+			stmt.setInt(2, u_id);
+			int count = stmt.executeUpdate();
+			if(count >0){
+				System.out.println("insert query ok");
+				insertRequstOk = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("insert query fail");
+			e.printStackTrace();
+		}finally {
+			closeDB(conn, stmt);
+		}
+		
+		return insertRequstOk;
+	}
+
+	public boolean hasRequest(String n_id) throws NamingException {
+		// TODO Auto-generated method stub
+		boolean hasRequest = false;
+		int id = Integer.parseInt(n_id);
+		
+		conn = getconnection(conn);
+		try {
+			stmt = conn.prepareStatement(Util.HASREQUEST);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			if(rs.next()){
+				System.out.println("hasRequest");
+				hasRequest = true;
+			}else{
+				System.out.println("has no request");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("has request query fail");
+			e.printStackTrace();
+		}finally {
+			closeDB(conn, stmt,rs);
+		}		
+		return hasRequest;
+	}
+
+	public List<User> getRequesterList(String n_id) throws NamingException {
+		// TODO Auto-generated method stub
+		System.out.println("get requester start");
+		int id = Integer.parseInt(n_id);
+		System.out.println(id);
+		Request request = new Request();
+		UserDAO uDAO = new UserDAO();
+		User requester = new User();
+		List<User> reqList = new ArrayList<User>();
+		
+		conn = getconnection(conn);
+		try {
+			stmt = conn.prepareStatement(Util.HASREQUEST);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				System.out.println("get reqeuster list query ok");
+				request.setR_id(rs.getInt("r_id"));
+				request.setU_id(rs.getInt("u_id"));
+				System.out.println(request.getR_id());
+				
+				requester=uDAO.getUserByNum(request.getR_id());
+				reqList.add(requester);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("get reqeuster list query fail");
+			e.printStackTrace();
+		}
+		return reqList;
+	}
 }

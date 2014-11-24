@@ -48,7 +48,7 @@ public class UserDAO extends JDBC {
 	public User getUser(String id) throws NamingException {
 		System.out.println("get user");
 		User user = null;
-
+		
 		try {
 
 			conn = getconnection(conn);
@@ -202,5 +202,84 @@ public class UserDAO extends JDBC {
 		}
 
 		return deleteUserOk;
+	}
+
+	public User getUserByNum(int id) throws NamingException {
+		System.out.println("get user by num id");
+		User user = null;
+		
+		try {
+			conn = getconnection(conn);
+			stmt = conn.prepareStatement(Util.HASUSERIDBYNUM);
+			stmt.setInt(1, id);
+
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				System.out.println("user exist");
+				user = new User();
+
+				user.setN_id(rs.getString("n_id"));
+				user.setU_id(rs.getString("u_id"));
+				user.setName(rs.getString("name"));
+				user.setPassword(rs.getString("password"));
+			}
+
+		} catch (SQLException e) {
+			System.out.println("hasuserid Query fail");
+			System.out.println("error " + e);
+
+		} finally {
+			closeDB(conn, stmt, rs);
+		}
+		return user;
+	}
+
+	public boolean addFriend(int userID, int friendID) throws NamingException {
+		// TODO Auto-generated method stub
+		System.out.println("add friend start");
+		boolean addOk = false;
+		
+		conn = getconnection(conn);
+		try {
+			stmt = conn.prepareStatement(Util.ADDFRIEND);
+			stmt.setInt(1, userID);
+			stmt.setInt(2, friendID);
+			int count = stmt.executeUpdate();
+			if(count >0){
+				System.out.println("add friend ok");
+				addOk=true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("add friend query fail");
+			e.printStackTrace();
+		} finally {
+			closeDB(conn, stmt);
+		}
+		return addOk;
+	}
+
+	public boolean deleteReq(int userID, int friendID) throws NamingException {
+		// TODO Auto-generated method stub
+		boolean deleteReqOk = false;
+		conn = getconnection(conn);
+		
+		try {
+			stmt = conn.prepareStatement(Util.DELETEREQ);
+			stmt.setInt(1, friendID);
+			stmt.setInt(2, userID);
+			int count = stmt.executeUpdate();
+			if(count > 0){
+				System.out.println("request delete ok");
+				deleteReqOk = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("delete reqeust query fail");
+			e.printStackTrace();
+		} finally {
+			closeDB(conn, stmt);
+		}
+		return deleteReqOk;
 	}	
 }

@@ -29,9 +29,6 @@
 <script src="./js/calendar.js"></script>
 
 <title>S CALENDAR</title>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>S CALENDAR</title>
 </head>
 
 <body>
