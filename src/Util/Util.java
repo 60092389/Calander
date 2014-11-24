@@ -40,6 +40,7 @@ public class Util {
 	public static final String DETAILVIEWPATH = "ViewSchedule.jsp";
 	public static final String SEARCHVIEW = "SearchView.jsp";
 	public static String REQEUSTVIEW = "RequestView.jsp";
+	public static final String FRIENDLIST = "FriendList.jsp";
 	
 	public static final String USERTYPE = "type";
 
@@ -49,6 +50,7 @@ public class Util {
 	public static final String HASUSERIDBYNUM = "SELECT * FROM User WHERE n_id = ?";
 	public static final String ADDFRIEND = "INSERT INTO friends (u_id, f_id) VALUES (?, ?)";
 	public static final String DELETEREQ = "DELETE FROM request WHERE r_id =? AND u_id=?";
+	public static final String GETFRIEND = "SELECT * FROM friends WHERE u_id = ?";
 	
 	
 

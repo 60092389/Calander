@@ -161,4 +161,34 @@ public class FriendDAO extends JDBC {
 		}
 		return reqList;
 	}
+
+	public ArrayList<User> getFriends(int id) throws NamingException {
+		// TODO Auto-generated method stub
+		System.out.println("get Friends start");
+		ArrayList<User> friends = new ArrayList<User>();
+		User friend = new User();
+		UserDAO uDAO = new UserDAO();
+		Friends getFri = new Friends();
+		conn = getconnection(conn);
+		try {
+			stmt = conn.prepareStatement(Util.GETFRIEND);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				getFri.setF_id(rs.getString("f_id"));
+				friend = uDAO.getUserByNum(Integer.parseInt(getFri.getF_id()));
+				
+				friends.add(friend);
+			}
+			System.out.println(friends.size());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("get friend query fail");
+			e.printStackTrace();
+		}finally {
+			closeDB(conn, stmt, rs);
+		}
+		return friends;
+	}	
 }

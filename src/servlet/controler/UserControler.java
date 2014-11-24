@@ -3,6 +3,7 @@ package servlet.controler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -84,6 +85,8 @@ public class UserControler extends SharedControler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(type.equals(Util.FRIENDS)){
+			doPost(request, response);
 		}
 	}
 
@@ -192,7 +195,27 @@ public class UserControler extends SharedControler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if (type.equals(Util.FRIENDS)){
+			try {
+				friendList(request, response);
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+	}
+
+	private void friendList(HttpServletRequest request,
+			HttpServletResponse response) throws NamingException, ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("friend list called");
+		int id = Integer.parseInt(request.getParameter(Util.USERID));
+		FriendDAO fDAO = new FriendDAO();
+		System.out.println("!!"+id);
+		ArrayList<User> friendList = fDAO.getFriends(id);
+		
+		request.setAttribute("friendList", friendList);
+		goPage(request, response, Util.FRIENDLIST);		
 	}
 
 	private void acceptReq(HttpServletRequest request,

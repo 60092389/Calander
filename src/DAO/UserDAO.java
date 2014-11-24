@@ -5,6 +5,7 @@ import java.sql.*;
 import javax.naming.*;
 import javax.sql.*;
 
+import DTO.Friends;
 import DTO.Schedule;
 import DTO.User;
 import Util.Util;
@@ -99,7 +100,7 @@ public class UserDAO extends JDBC {
 			System.out.println("error " + e);
 
 		} finally {
-			closeDB(conn, stmt, rs);
+			closeDB(conn, stmt);
 		}
 		return createOk;
 	}
@@ -176,7 +177,7 @@ public class UserDAO extends JDBC {
 			System.out.println("error " + e);
 
 		} finally {
-			closeDB(conn, stmt, rs);
+			closeDB(conn, stmt);
 		}
 		return updateOk;
 	}
@@ -198,7 +199,7 @@ public class UserDAO extends JDBC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			closeDB(conn, stmt, rs);
+			closeDB(conn, stmt);
 		}
 
 		return deleteUserOk;

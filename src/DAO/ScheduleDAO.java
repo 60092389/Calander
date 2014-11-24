@@ -88,7 +88,7 @@ public class ScheduleDAO extends JDBC {
 	}
 
 	public static ArrayList<Schedule> getNullScheduleList() {
-		System.out.println("get null scheduleList!!");
+		
 		ArrayList<Schedule> returnSchedules = new ArrayList<Schedule>();
 
 		return returnSchedules;

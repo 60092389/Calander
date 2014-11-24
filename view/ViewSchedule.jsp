@@ -81,7 +81,7 @@ System.out.println("at view schedule : "+date);
 </div>
 </div>
 </header>
-
+<%@ include file="./popup.jsp"%>
 <%@ include file="./footer.jsp" %>
 
 </body>

@@ -32,6 +32,9 @@
 <body id="page-top" class="index">
 
 <%
+	UserControler controler = new UserControler();
+	UserDAO userDao = new UserDAO(); 
+	User user = controler.isSession(request,userDao);
 
 	String navbarTitle1 = Util.LOGIN;
 	String navbarTitle2 = Util.JOIN;
@@ -40,17 +43,14 @@
 	
 	String formPath1 = "#"+Util.LOGIN;
 	String formPath2 = "#"+Util.JOIN;
-	String formPath3 = "#"+Util.FRIENDS;	
-	String formPath4 = "#"+Util.ADDFRIENDS;
-	
-	UserControler controler = new UserControler();
-	UserDAO userDao = new UserDAO(); 
-	User user = controler.isSession(request,userDao);
-	
+	String formPath3 = "";
+	String formPath4 = "";
 	if (user != null) {
 		
 		navbarTitle1 = Util.LOGOUT;
 		navbarTitle2 = Util.USERUPDATE;
+		formPath3 = "UserControler.do?type="+Util.FRIENDS+"&id="+user.getN_id();	
+		formPath4 = "#"+Util.ADDFRIENDS;
 		
 		if(!user.getU_id().equals(Util.ADMIN))
 		{			
