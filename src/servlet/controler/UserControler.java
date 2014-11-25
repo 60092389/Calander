@@ -45,13 +45,14 @@ public class UserControler extends SharedControler {
 				user.setN_id(request.getParameter("nid"));
 				FriendDAO fDAO = new FriendDAO();
 				try {
-					if(fDAO.hasRequest(user.getN_id())){
-						List<User> requester = fDAO.getRequesterList(user.getN_id());
+					if (fDAO.hasRequest(user.getN_id())) {
+						List<User> requester = fDAO.getRequesterList(user
+								.getN_id());
 						request.setAttribute("reqlist", requester);
 						System.out.println("get requester ok");
 						System.out.println(requester.get(0).getName());
 						goPage(request, response, Util.REQEUSTVIEW);
-					}else{
+					} else {
 						goPage(request, response, Util.CALENDARPATH, user);
 					}
 				} catch (NamingException e) {
@@ -70,7 +71,7 @@ public class UserControler extends SharedControler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if (type.equals(Util.REQUEST)){
+		} else if (type.equals(Util.REQUEST)) {
 			System.out.println("request called");
 			try {
 				sendRequest(request, response);
@@ -78,33 +79,36 @@ public class UserControler extends SharedControler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if(type.equals(Util.REJECTREQ)){
+		} else if (type.equals(Util.REJECTREQ)) {
 			try {
 				rejectRequest(request, response);
 			} catch (NamingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if(type.equals(Util.FRIENDS)){
+		} else if (type.equals(Util.FRIENDS)) {
 			doPost(request, response);
 		}
 	}
 
-	private void rejectRequest(HttpServletRequest request, HttpServletResponse response) throws NamingException, ServletException, IOException {
+	private void rejectRequest(HttpServletRequest request,
+			HttpServletResponse response) throws NamingException,
+			ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("rejectRequest start");
 		UserDAO uDAO = new UserDAO();
 		int userID = Integer.parseInt(request.getParameter(Util.USERID));
 		int friendID = Integer.parseInt(request.getParameter("friednid"));
-		
-		if(uDAO.deleteReq(userID, friendID)){
+
+		if (uDAO.deleteReq(userID, friendID)) {
 			goPage(request, response, Util.MAINPATH);
 		}
-		
+
 	}
 
 	private void sendRequest(HttpServletRequest request,
-			HttpServletResponse response) throws NamingException, ServletException, IOException {
+			HttpServletResponse response) throws NamingException,
+			ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("send request start");
 		// 요청 받는 사람 아이디
@@ -112,11 +116,11 @@ public class UserControler extends SharedControler {
 		// 요청 하는 사람 아이디
 		int r_id = Integer.parseInt(request.getParameter(Util.USERID));
 		FriendDAO fDAO = new FriendDAO();
-		if(fDAO.insertRequest(r_id,u_id)){
+		if (fDAO.insertRequest(r_id, u_id)) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('요청 완료');history.go(-1);</script>");
-			out.flush();		
+			out.flush();
 		}
 	}
 
@@ -143,13 +147,14 @@ public class UserControler extends SharedControler {
 				user.setN_id(request.getParameter("nid"));
 				FriendDAO fDAO = new FriendDAO();
 				try {
-					if(fDAO.hasRequest(user.getN_id())){
-						List<User> requester = fDAO.getRequesterList(user.getN_id());
+					if (fDAO.hasRequest(user.getN_id())) {
+						List<User> requester = fDAO.getRequesterList(user
+								.getN_id());
 						request.setAttribute("reqlist", requester);
 						System.out.println("get requester ok");
 						System.out.println(requester.get(0).getName());
 						goPage(request, response, Util.REQEUSTVIEW);
-					}else{
+					} else {
 						goPage(request, response, Util.CALENDARPATH, user);
 					}
 				} catch (NamingException e) {
@@ -188,14 +193,14 @@ public class UserControler extends SharedControler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if (type.equals(Util.ACCEPTREQ)){
+		} else if (type.equals(Util.ACCEPTREQ)) {
 			try {
 				acceptReq(request, response);
 			} catch (NamingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if (type.equals(Util.FRIENDS)){
+		} else if (type.equals(Util.FRIENDS)) {
 			try {
 				friendList(request, response);
 			} catch (NamingException e) {
@@ -206,35 +211,38 @@ public class UserControler extends SharedControler {
 	}
 
 	private void friendList(HttpServletRequest request,
-			HttpServletResponse response) throws NamingException, ServletException, IOException {
+			HttpServletResponse response) throws NamingException,
+			ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("friend list called");
 		int id = Integer.parseInt(request.getParameter(Util.USERID));
 		FriendDAO fDAO = new FriendDAO();
-		System.out.println("!!"+id);
+		System.out.println("!!" + id);
 		ArrayList<User> friendList = fDAO.getFriends(id);
-		
+
 		request.setAttribute("friendList", friendList);
-		goPage(request, response, Util.FRIENDLIST);		
+		goPage(request, response, Util.FRIENDLIST);
 	}
 
 	private void acceptReq(HttpServletRequest request,
-			HttpServletResponse response) throws NamingException, ServletException, IOException {
+			HttpServletResponse response) throws NamingException,
+			ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("accept reqeust start");
 		int userID = Integer.parseInt(request.getParameter(Util.USERID));
 		int friendID = Integer.parseInt(request.getParameter("friednid"));
 		UserDAO uDAO = new UserDAO();
 		// 양쪽다 친구를 추가 하기 위해 파라미터를 바꿔 두번 호출
-		if(uDAO.addFriend(userID, friendID) && uDAO.addFriend(friendID, userID)){
+		if (uDAO.addFriend(userID, friendID)
+				&& uDAO.addFriend(friendID, userID)) {
 			System.out.println("friend add ok");
-			if(uDAO.deleteReq(userID, friendID)){
+			if (uDAO.deleteReq(userID, friendID)) {
 				goPage(request, response, Util.MAINPATH);
 			}
-		}else{
+		} else {
 			System.out.println("friend add fail");
 		}
-		
+
 	}
 
 	private void searchFriend(HttpServletRequest request,
@@ -264,9 +272,9 @@ public class UserControler extends SharedControler {
 			System.out.println("delete user fail");
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('delete user not valid');</script>");
+			out.println("<script>alert('delete user not valid');history.go(-1);</script>");
 			out.flush();
-			//에러팝업창
+			// 에러팝업창
 			// goPage(request, response, Util.ERRORPATH);
 		}
 
@@ -299,18 +307,17 @@ public class UserControler extends SharedControler {
 				System.out.println("longin failed");
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('login not valid');</script>");
-				out.flush();			
-				goPage(request, response, Util.MAINPATH);
+				out.println("<script>alert('login not valid');history.go(-1);</script>");
+				out.flush();
+				// goPage(request, response, Util.MAINPATH);
 			}
 		} else {
 			System.out.println("longin failed");
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('login not valid');</script>");
+			out.println("<script>alert('login not valid');history.go(-1);</script>");
 			out.flush();
-			
-			goPage(request, response, Util.MAINPATH);
+			// goPage(request, response, Util.MAINPATH);
 		}
 	}
 
@@ -346,14 +353,14 @@ public class UserControler extends SharedControler {
 			} else {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('create not valid');</script>");
+				out.println("<script>alert('create not valid');history.go(-1);</script>");
 				out.flush();
 				// goPage(request, response, Util.ERRORPATH);
 			}
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('create not valid');</script>");
+			out.println("<script>alert('create not valid');history.go(-1);</script>");
 			out.flush();
 		}
 	}
@@ -422,7 +429,7 @@ public class UserControler extends SharedControler {
 					PrintWriter out = response.getWriter();
 					out.println("<script>alert('정보수정에 실패 했습니다.');history.go(-1);</script>");
 					out.flush();
-					goPage(request, response, Util.MAINPATH);
+					// goPage(request, response, Util.MAINPATH);
 				}
 			} catch (ClassNotFoundException | NamingException | SQLException e) {
 				// TODO Auto-generated catch block
@@ -435,7 +442,7 @@ public class UserControler extends SharedControler {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('비밀번호가 일치하지 않습니다.');history.go(-1);</script>");
 			out.flush();
-			goPage(request, response, Util.MAINPATH);
+			// goPage(request, response, Util.MAINPATH);
 		}
 	}
 }

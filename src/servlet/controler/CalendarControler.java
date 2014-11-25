@@ -60,19 +60,18 @@ public class CalendarControler extends SharedControler {
 				// TODO Auto-generated catch block
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('delete not valid');</script>");
+				out.println("<script>alert('delete not valid');history.go(-1);</script>");
 				out.flush();
 				e.printStackTrace();
 			}
 			goPage(request, response, resultPage, user);
 
-		}else
-		{
+		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('delete not valid');</script>");
+			out.println("<script>alert('delete not valid');history.go(-1);</script>");
 			out.flush();
-			//에러팝업창
+			// 에러팝업창
 		}
 	}
 
@@ -152,7 +151,7 @@ public class CalendarControler extends SharedControler {
 					} else {
 						response.setContentType("text/html; charset=UTF-8");
 						PrintWriter out = response.getWriter();
-						out.println("<script>alert('add schedule not valid');</script>");
+						out.println("<script>alert('add schedule not valid');history.go(-1);</script>");
 						out.flush();
 						// goPage(request, response, Util.ERRORPATH);
 					}
@@ -213,7 +212,7 @@ public class CalendarControler extends SharedControler {
 					System.out.println("schedule update fail");
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
-					out.println("<script>alert('update schedule not valid');</script>");
+					out.println("<script>alert('update schedule not valid');history.go(-1);</script>");
 					out.flush();
 					// goPage(request, response, Util.ERRORPATH);
 				}
