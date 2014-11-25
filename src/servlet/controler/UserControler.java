@@ -97,7 +97,7 @@ public class UserControler extends SharedControler {
 			}
 		}
 	}
-
+	
 	private void deleteFriend(HttpServletRequest request,
 			HttpServletResponse response) throws NamingException, ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -228,7 +228,26 @@ public class UserControler extends SharedControler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if(type.equals(Util.SHOWFS)){
+			try {
+				showFriendSchedule(request,response);
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+	}
+
+	private void showFriendSchedule(HttpServletRequest request,
+			HttpServletResponse response) throws NamingException, ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("show friend schedule start");
+		int f_id = Integer.parseInt(request.getParameter(Util.FRIENDID));
+		UserDAO uDAO = new UserDAO();
+		User friend = uDAO.getUserByNum(f_id);
+		
+		request.setAttribute("f_id", request.getParameter(Util.FRIENDID));
+		goPage(request, response, Util.CALENDARPATH, friend);
 	}
 
 	private void friendList(HttpServletRequest request,
@@ -255,12 +274,7 @@ public class UserControler extends SharedControler {
 		FriendDAO fDAO = new FriendDAO();
 		UserDAO uDAO = new UserDAO();
 		// 양쪽다 친구를 추가 하기 위해 파라미터를 바꿔 두번 호출
-<<<<<<< HEAD
 		if(fDAO.addFriend(userID, friendID) && fDAO.addFriend(friendID, userID)){
-=======
-		if (uDAO.addFriend(userID, friendID)
-				&& uDAO.addFriend(friendID, userID)) {
->>>>>>> 1f0d1226ddcebfa2b56d299a989b9b7704214fb6
 			System.out.println("friend add ok");
 			if (uDAO.deleteReq(userID, friendID)) {
 				goPage(request, response, Util.MAINPATH);
@@ -368,7 +382,7 @@ public class UserControler extends SharedControler {
 		user.setU_id(inputId);
 		user.setName(inputName);
 
-		if (!checkUserId(userDao, user)
+		if (checkUserId(userDao, user)
 				&& checkUserPwd(inputPassword, inputPasswordConfirm)) {
 			user.setPassword(inputPassword);
 

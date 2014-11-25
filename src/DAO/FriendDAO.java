@@ -181,7 +181,7 @@ public class FriendDAO extends JDBC {
 				
 				friends.add(friend);
 			}
-			System.out.println(friends.size());
+			System.out.println("친구수 in getFriends:"+friends.size());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("get friend query fail");

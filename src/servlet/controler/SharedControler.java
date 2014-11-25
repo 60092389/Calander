@@ -29,7 +29,7 @@ public class SharedControler extends HttpServlet{
 		
 			user = userDao.getUser(sessionId);
 		}
-		return user;		
+		return user;
 	}
 	
 	public void goPage(HttpServletRequest request,

@@ -67,7 +67,7 @@ public class ScheduleDAO extends JDBC {
 				schedule.setTitle(rs.getString(4));
 				schedule.setYear(rs.getString(5));
 				schedule.setS_id(Integer.parseInt(rs.getString(6)));
-
+				
 				schedules.get(Integer.parseInt(schedule.getDay()))
 						.add(schedule);
 			}
