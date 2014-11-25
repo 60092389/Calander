@@ -1,11 +1,11 @@
 package DTO;
 
 public class Request {
-	private String r_id;
-	private String u_id;
+	private int r_id;
+	private int u_id;
 	
-	public String getR_id() {return r_id;}
-	public void setR_id(String r_id) {this.r_id = r_id;}
-	public String getU_id() {return u_id;}
-	public void setU_id(String u_id) {this.u_id = u_id;}	
+	public int getR_id() {return r_id;}
+	public void setR_id(int i) {this.r_id = i;}
+	public int getU_id() {return u_id;}
+	public void setU_id(int i) {this.u_id = i;}	
 }

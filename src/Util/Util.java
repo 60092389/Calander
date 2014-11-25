@@ -17,6 +17,8 @@ public class Util {
 	public static final String REQUEST = "friend request"; // 11-20 01:02 친구 요청에 필요
 	public static final String ACCEPTREQ = "accept request";
 	public static final String REJECTREQ = "reject request";
+	public static final String DELFRIEND = "delete friend";
+	public static final String FRIENDID = "friend id";
 	//SQL
 	public static final String LOGINQUERY = "SELECT * FROM User WHERE u_id =? AND password=?";
 	public static final String CREATEUSERQUERY = "INSERT INTO User (u_id, password, name) VALUES(?,?,?)";
@@ -51,6 +53,7 @@ public class Util {
 	public static final String ADDFRIEND = "INSERT INTO friends (u_id, f_id) VALUES (?, ?)";
 	public static final String DELETEREQ = "DELETE FROM request WHERE r_id =? AND u_id=?";
 	public static final String GETFRIEND = "SELECT * FROM friends WHERE u_id = ?";
+	public static final String DELFRIENDSQL = "DELETE FROM friends WHERE u_id=? AND f_id=?";
 	
 	
 

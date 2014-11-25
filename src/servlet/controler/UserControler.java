@@ -87,7 +87,28 @@ public class UserControler extends SharedControler {
 			}
 		}else if(type.equals(Util.FRIENDS)){
 			doPost(request, response);
+		} else if(type.equals(Util.DELFRIEND)){
+			try {
+				deleteFriend(request, response);
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+	}
+
+	private void deleteFriend(HttpServletRequest request,
+			HttpServletResponse response) throws NamingException, ServletException, IOException {
+		// TODO Auto-generated method stub
+		int f_id = Integer.parseInt(request.getParameter(Util.FRIENDID));
+		int u_id = Integer.parseInt(request.getParameter(Util.USERID));
+		FriendDAO fDAO = new FriendDAO();
+		if(fDAO.deleteFriend(u_id,f_id) && fDAO.deleteFriend(f_id, u_id)){
+			friendList(request, response);	
+		}else{
+			System.out.println("delete friend fail");
+		}
+		
 	}
 
 	private void rejectRequest(HttpServletRequest request, HttpServletResponse response) throws NamingException, ServletException, IOException {
@@ -224,9 +245,10 @@ public class UserControler extends SharedControler {
 		System.out.println("accept reqeust start");
 		int userID = Integer.parseInt(request.getParameter(Util.USERID));
 		int friendID = Integer.parseInt(request.getParameter("friednid"));
+		FriendDAO fDAO = new FriendDAO();
 		UserDAO uDAO = new UserDAO();
 		// 양쪽다 친구를 추가 하기 위해 파라미터를 바꿔 두번 호출
-		if(uDAO.addFriend(userID, friendID) && uDAO.addFriend(friendID, userID)){
+		if(fDAO.addFriend(userID, friendID) && fDAO.addFriend(friendID, userID)){
 			System.out.println("friend add ok");
 			if(uDAO.deleteReq(userID, friendID)){
 				goPage(request, response, Util.MAINPATH);

@@ -49,6 +49,7 @@
 								<th>USER ID</th>
 								<th>NAME</th>
 								<th>SHOWSCHEDULE</th>
+								<th>DELETEFRIEND</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -64,10 +65,12 @@
 							<tr class="success">						
 								<td><%=friendList.get(i).getU_id()%></td>							
 								<td><%=friendList.get(i).getName()%></td>
-
-
 								<td>
-									<a href="" class= "btn btn-success">SHOWSCHEDULE</a>
+									<a href="UserControler.do?type=" class= "btn btn-success">SHOWSCHEDULE</a>
+								</td>
+								<td>
+									<a href="UserControler.do?type=<%=Util.DELFRIEND %>&<%=Util.FRIENDID%>=<%=friendList.get(i).getN_id()%>
+															&<%=Util.USERID%>=<%=user.getN_id()%>" class= "btn btn-warning">DELETE</a>
 								</td>
 							</tr>
 							<%
