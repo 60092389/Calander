@@ -312,7 +312,7 @@ public class UserControler extends SharedControler {
 			System.out.println("delete user fail");
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('delete user not valid');history.go(-1);</script>");
+			out.println("<script>alert('유저 삭제 오류');history.go(-1);</script>");
 			out.flush();
 			// 에러팝업창
 			// goPage(request, response, Util.ERRORPATH);
@@ -347,7 +347,7 @@ public class UserControler extends SharedControler {
 				System.out.println("longin failed");
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('login not valid');history.go(-1);</script>");
+				out.println("<script>alert('비밀번호 오류');history.go(-1);</script>");
 				out.flush();
 				// goPage(request, response, Util.MAINPATH);
 			}
@@ -355,7 +355,7 @@ public class UserControler extends SharedControler {
 			System.out.println("longin failed");
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('login not valid');history.go(-1);</script>");
+			out.println("<script>alert('유저 정보 조회 실패');history.go(-1);</script>");
 			out.flush();
 			// goPage(request, response, Util.MAINPATH);
 		}
@@ -382,7 +382,7 @@ public class UserControler extends SharedControler {
 		user.setU_id(inputId);
 		user.setName(inputName);
 
-		if (checkUserId(userDao, user)
+		if (!checkUserId(userDao, user)
 				&& checkUserPwd(inputPassword, inputPasswordConfirm)) {
 			user.setPassword(inputPassword);
 
@@ -393,14 +393,14 @@ public class UserControler extends SharedControler {
 			} else {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('create not valid');history.go(-1);</script>");
+				out.println("<script>alert('아이디 중복');history.go(-1);</script>");
 				out.flush();
 				// goPage(request, response, Util.ERRORPATH);
 			}
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('create not valid');history.go(-1);</script>");
+			out.println("<script>alert('ID 4자리 이상 / PW 8자리 이상 / 공란 확인');history.go(-1);</script>");
 			out.flush();
 		}
 	}

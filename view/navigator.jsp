@@ -74,7 +74,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                <%if(user != null)  {%>      
+                <%if(user != null && !user.getU_id().equals(Util.ADMIN))  {%>      
                     <li class="page-scroll">
                         <a href= <%=formPath3%> class="portfolio-link" data-toggle="modal"><%=navbarTitle3%></a>
                     </li>
