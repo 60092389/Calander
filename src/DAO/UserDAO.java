@@ -11,6 +11,7 @@ import DTO.User;
 import Util.Util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO extends JDBC {
 	public UserDAO() {
@@ -77,6 +78,55 @@ public class UserDAO extends JDBC {
 		}
 		return user;
 	}
+	
+	public List<User> getPage(int startPos, int numInPage) 
+			throws SQLException, ClassNotFoundException{
+		System.out.println("start getPage");
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		List<User> users = new ArrayList<User>();
+		
+		try {
+			try {
+				conn = getconnection(conn);
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("get page conn ok");
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery("SELECT * FROM user ORDER BY n_id DESC LIMIT " + startPos+", "+numInPage);
+			
+			while(rs.next()) {
+				
+				System.out.println("getpage query ok");
+				User user = new User();
+
+				user.setN_id(rs.getString("n_id"));
+				user.setU_id(rs.getString("u_id"));
+				user.setPassword(rs.getString("password"));
+				user.setName(rs.getString("name"));
+
+				users.add(user);
+			
+			}
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("getpage query failed");
+			e.printStackTrace();
+		}finally {
+			// 무슨 일이 있어도 리소스를 제대로 종료
+			if (rs != null) try{rs.close();} catch(SQLException e) {}
+			if (stmt != null) try{stmt.close();} catch(SQLException e) {}
+			if (conn != null) try{conn.close();} catch(SQLException e) {}
+		}
+		
+		return users;		
+	}	
 
 	public boolean createUser(User user) throws NamingException, ClassNotFoundException{
 

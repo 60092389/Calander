@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
 <%@page import="java.util.*"%>
 
 <!DOCTYPE html>
@@ -33,11 +31,8 @@
 
 <body>
 	<%@include file="./navigator.jsp"%>
+	<%@include file="./Page.jsp" %>
 
-	<%
-		ArrayList<User> allUsers = null ;  				// user list 를 담는 객체
-		allUsers = userDao.getAllUsers();				// 모든 user list를 받는다
-	%>
 
 
 	<header>
@@ -60,30 +55,28 @@
 						<tbody>
 							<%
 								//user List 가 존재 한다면 
-								if(allUsers != null) { 
+								if(users != null) { 
 								// 모든 user list를 반복문으로 출력한다.
 								int i;
-								for(i=0;i<allUsers.size();i++) {
+								for(i=0;i<users.size();i++) {
 							%>
 
 							<!--  User list 를 출력한다 -->
 							<tr class="success">
 
-								<td><%=allUsers.get(i).getN_id()%></td>
-								<td><%=allUsers.get(i).getU_id()%></td>
-								<td><%=allUsers.get(i).getPassword()%></td>
-								<td><%=allUsers.get(i).getName()%></td>
+								<td><%=users.get(i).getN_id()%></td>
+								<td><%=users.get(i).getU_id()%></td>
+								<td><%=users.get(i).getPassword()%></td>
+								<td><%=users.get(i).getName()%></td>
 
 
 								<td>
 									<%
-										if(!allUsers.get(i).getU_id().equals(Util.ADMIN)){
+										if(!users.get(i).getU_id().equals(Util.ADMIN)){
 									%> <a
-									href="UserControler.do?type=<%=Util.USERDELETEBTN%>&<%=Util.USERID%>=<%=allUsers.get(i).getN_id()%>"
+									href="UserControler.do?type=<%=Util.USERDELETEBTN%>&<%=Util.USERID%>=<%=users.get(i).getN_id()%>"
 									class="btn btn-warning" data-toggle="modal"> <%=Util.USERDELETEBTN%>
-								</a> <%
- 	}
- %>
+								</a> <%	} %>
 
 								</td>
 							</tr>
@@ -97,16 +90,45 @@
 						</tbody>
 
 					</table>
-					<jsp:include page="page.jsp">
-						<jsp:param name="currentPage" value="${users.page}" />
-						<jsp:param name="url" value="user" />
-						<jsp:param name="startPage" value="${users.startPageNo}" />
-						<jsp:param name="endPage" value="${users.endPageNo}" />
-						<jsp:param name="numPages" value="${users.numPages}" />
-					</jsp:include>
+					
+					
+					
 				</div>
+				
+				<div class="text-center">
+					<ul class="pagination">
+					
+					<%
+						if(endPage > numPages){
+							endPage = numPages;
+						}
+						if(pageNo <= 1){
+					%>
+					<li class="disabled"><a href="#">&laquo;</a>
+				<%	} else { %>
+					<li><a href="AdminView.jsp?pageNo=<%=pageNo-1 %>">&laquo;</a></li>
+				<%	}
+						String className = "";
+						for(int i = startPage; i<= endPage; i++){
+							className = (i == pageNo)? "active" : "";
+					%>
+					<li	class="<%=className%>">
+						<a href=./AdminView.jsp?pageNo=<%=i%>><%=i%></a>
+					</li>
+				<%	}
+						if(pageNo >= numPages){
+					%>
+					<li class="disabled"><a href="#">&raquo;</a></li>
+				<%	} else { %>
+					<li><a href="AdminView.jsp?pageNo=<%=pageNo+1 %>">&raquo;</a></li>
+				<%	}%>
+			
+				</ul>
+			</div>
+				
 			</section>
 		</div>
+		
 	</header>
 
 	<%@ include file="./footer.jsp"%>

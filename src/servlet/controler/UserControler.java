@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -485,4 +486,47 @@ public class UserControler extends SharedControler {
 			// goPage(request, response, Util.MAINPATH);
 		}
 	}
+	
+	//페이지 넘기기
+	public void goPage(HttpServletRequest request,
+			HttpServletResponse response, String path) throws ServletException, IOException
+	{
+		System.out.println("go page");
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher(path);
+		rd.forward(request, response);
+	}
+	
+	public int getNumPages(int pageNo, int numInPage) throws ClassNotFoundException{
+		System.out.println("get num pages");
+		int numPages, numItems;				
+		List<User> users = new ArrayList<User>();
+		UserDAO uDAO = new UserDAO();
+		try {
+			users = uDAO.getAllUsers();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		numItems = users.size();
+		numPages = (int)Math.ceil((double)numItems/(double)numInPage);
+		return numPages;
+	}
+	
+	public int getStartPos(int pageNo, int numInPage){		
+		System.out.println("get start pos");
+		System.out.println(pageNo);
+		int startPos = (pageNo-1) * numInPage;
+		return startPos;
+	}
+	public List<User> getPageUsers(int startPos, int numInPage) throws ClassNotFoundException, SQLException{
+		System.out.println("get page users");
+		List<User> users = new ArrayList<User>();
+		UserDAO uDAO = new UserDAO();
+		users = (List<User>)uDAO.getPage(startPos,numInPage);
+		
+		return users;		
+	}	
+	
 }
