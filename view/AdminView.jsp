@@ -31,7 +31,7 @@
 
 <body>
 	<%@include file="./navigator.jsp"%>
-	<%@include file="./Page.jsp" %>
+	<%@include file="./page.jsp" %>
 
 
 

@@ -1,41 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="currentPage" value="${param.currentPage}" />
-<c:set var="url" value="${param.url}" />
-<c:set var="startPage" value="${param.startPage}" />
-<c:set var="endPage" value="${param.endPage}" />
-<c:set var="numPages" value="${param.numPages}" />
-<nav class="pagination_centered">
-	<ul class="pagination">
-		<c:choose>
-			<c:when test="${1 >= currentPage}">
-				<li class="disabled"><a href="#">&laquo;</a></li>
-			</c:when>
-			<c:otherwise>
-				<li><a href="${url}?page=${currentPage - 1}">&laquo;</a></li>
-			</c:otherwise>
-		</c:choose>
+    pageEncoding="UTF-8"%>
+    
+<%@ page import="servlet.controler.UserControler"%>
+<%@ page import="DAO.UserDAO"%>
+<%@ page import="DTO.User"%>
+<%@ page import="Util.Util"%>
+<%@page import="java.util.*"%>
 
-		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-			<c:choose>
-				<c:when test="${i == currentPage}">
-					<li class="active"><a href="${url}?page=${i}">${i}</a></li>
-				</c:when>
-				<c:otherwise>
-					<li><a href="${url}?page=${i}">${i}</a></li>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset = "UTF-8">
 
-		<c:choose>
-			<c:when test="${currentPage >= numPages}">
-				<li class="disabled"><a href="#">&raquo;</a></li>
-			</c:when>
-			<c:otherwise>
-				<li><a href="${url}?page=${currentPage + 1}">&raquo;</a></li>
-			</c:otherwise>
-		</c:choose>
-	</ul>
-</nav>
 
+<title>S CALENDAR</title>
+</head>
+<body>
+
+	<%
+		UserDAO usersDao = new UserDAO(); 
+		ArrayList<User> allUsers = null ;  				// user list 를 담는 객체
+		allUsers = usersDao.getAllUsers();				// 모든 user list를 받는다
+	%>
+	
+	
+	
+	<%	
+	//AdminView에서 사용자들을 10명씩 보여줌
+	int pageNo = 1;
+	try{	
+		pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		}catch(NumberFormatException e){}
+	UserControler uControler = new UserControler();
+	int numInPage = 10;
+	int startPos = uControler.getStartPos(pageNo,numInPage);
+	int numPages = uControler.getNumPages(pageNo,numInPage);
+	
+	List<User> users = (ArrayList<User>)uControler.getPageUsers(startPos,numInPage);
+	
+%> 
+
+
+<% 
+//페이지 넘기는 버튼 함수
+	int startPage, endPage;
+	int delta = 5;
+	startPage = (pageNo <= delta)? 1: pageNo - delta;
+	endPage = startPage + (delta*2) +1;
+%>
+
+
+</body>
+</html>
