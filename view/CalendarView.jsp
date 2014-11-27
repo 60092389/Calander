@@ -38,6 +38,9 @@
 		int month = cr.get(Calendar.MONTH);
 		int date = cr.get(Calendar.DATE);
 		ScheduleDAO  sd = new ScheduleDAO();
+		
+		String f_id = (String)request.getAttribute("f_id");
+		System.out.println("친구아이디:"+f_id);
 
 		String today = year + ":" + (month + 1) + ":" + date;
 
@@ -115,7 +118,6 @@
 						</tr>
 					</table>
 					<input type="hidden" name="whatRequest" value="changeMonth">
-
 				</form>
 				<table cellpadding="2" cellspacing="0" border="1" align="center"
 					class="table table-striped table-hover">
@@ -143,7 +145,7 @@
 										: "black";
 								count++;
 						%>
-						<td bgcolor="<%=bgcolor%>"><font size="2" color=<%=color%>><%=i%></font>
+						<td width="150px" bgcolor="<%=bgcolor%>"><font size="2" color=<%=color%>><%=i%></font>
 						<%
 							dailySchedule = user_Schedule.get(i);
 							  
@@ -159,7 +161,13 @@
 						<form id="contact-form" action="CalendarControler.go" method="post">
     						<input type="hidden" name="whatRequest" value="viewdetail" />
     						<input type="hidden" name="scheduleid" value="<%=sc.getS_id() %>" />
+    						<% if(f_id == null) {%>
 							<input type="submit" value="<%=sc.getTitle()%>" />
+							<%}else { %>
+							<ul>
+								<li><%=sc.getTitle()%></li>
+							</ul>	
+							<%} %>
 						</form>
 							<%
 								}
@@ -182,13 +190,15 @@
 						%>
 					</tr>
 				</table>
+				<% if(f_id == null) {%>
 				<div id="add_sch">
 
 					<a href=#addschedule class="portfolio-link" data-toggle="modal">
 						<input type="button" value="일정추가" class="btn btn-default">
 					</a>
 
-				</div>
+				</div>	
+				<%} %>			
 			</div>
 		</div>
 	</section>
