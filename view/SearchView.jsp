@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ page import="DTO.User" %>
+ <%@ page import="DAO.FriendDAO" %>
+ <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +12,9 @@
 <body>
 	<%@include file="./navigator.jsp"%>
 <%
-	User friend = (User)request.getAttribute("friend");	
+	User friend = (User)request.getAttribute("friend");
+	UserControler uCont = new UserControler(); 
+	boolean isFriend = uCont.isFriend(Integer.parseInt(user.getN_id()),Integer.parseInt(friend.getN_id()));
 %>
 	
 	<header>
@@ -36,9 +40,13 @@
 								<td><%=friend.getU_id()%></td>								
 								<td><%=friend.getName()%></td>
 								<td>
+								<%if(!isFriend){%>
 									<a
 									href="UserControler.do?type=<%=Util.REQUEST%>&<%=Util.FID%>=<%=friend.getN_id()%>&<%=Util.USERID%>=<%=user.getN_id() %>"
 									class="btn btn-warning" data-toggle="modal"> 요청하기</a> 
+									<%}else{ %>
+									이미 친구 입니다.
+									<%} %>
 								</td>
 							</tr>
 							<%

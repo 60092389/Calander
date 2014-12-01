@@ -143,7 +143,13 @@ public class UserControler extends SharedControler {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('요청 완료');history.go(-1);</script>");
 			out.flush();
+		}else{
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('이미 요청하였습니다.');history.go(-1);</script>");
+			out.flush();
 		}
+			
 	}
 
 	private void removeSession(HttpServletRequest request) {
@@ -485,6 +491,22 @@ public class UserControler extends SharedControler {
 			out.flush();
 			// goPage(request, response, Util.MAINPATH);
 		}
+	}
+	
+	public boolean isFriend(int u_id, int f_id) throws NamingException{ 
+		System.out.println("is friend start");
+		boolean isfriend = false;
+		FriendDAO fDAO = new FriendDAO();
+		ArrayList<User> friends = fDAO.getFriends(u_id);
+		
+		for(int i = 0; i < friends.size(); i++){
+			if(Integer.parseInt(friends.get(i).getN_id()) == f_id){
+				System.out.println("이미 친구 입니다.");
+				isfriend = true;
+				break;
+			}
+		}		
+		return isfriend;
 	}
 	
 	//페이지 넘기기
