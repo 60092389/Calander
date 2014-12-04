@@ -14,7 +14,10 @@
 <%
 	User friend = (User)request.getAttribute("friend");
 	UserControler uCont = new UserControler(); 
-	boolean isFriend = uCont.isFriend(Integer.parseInt(user.getN_id()),Integer.parseInt(friend.getN_id()));
+	boolean isFriend = false;
+	if(friend != null){
+		isFriend = uCont.isFriend(Integer.parseInt(user.getN_id()),Integer.parseInt(friend.getN_id()));
+	}
 %>
 	
 	<header>

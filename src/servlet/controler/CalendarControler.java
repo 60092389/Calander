@@ -116,10 +116,10 @@ public class CalendarControler extends SharedControler {
 			dispatcher.forward(request, response);
 		} else if (type.equals("addSchedule")) {
 			if (user != null) {
-				Schedule schedule = new Schedule();
+				Schedule schedule = new Schedule();				
 				
-				if(request.getParameter("inputDay") == null || request.getParameter("title")==null 
-						||request.getParameter("inputContents")==null){
+				if(request.getParameter("inputDay") == "" || request.getParameter("inputTitle")=="" 
+						||request.getParameter("inputContents")==""){
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
 					out.println("<script>alert('일정추가 오류. 빈칸이 없는지 확인하세요');history.go(-1);</script>");

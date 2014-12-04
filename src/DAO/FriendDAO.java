@@ -239,5 +239,37 @@ public class FriendDAO extends JDBC {
 		}
 		
 		return delfriendOk;
-	}	
+	}
+
+	public boolean deleteSelfFriend(int id) throws NamingException {
+		// TODO Auto-generated method stub
+		boolean delselfOk = false;
+		conn = getconnection(conn);
+		try {
+			stmt = conn.prepareStatement(Util.HASFRIENDID);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			if(!rs.next()){
+				System.out.println("user has no friends");
+				delselfOk = true;
+				return delselfOk;
+			}else{
+				closeDB(conn, stmt, rs);
+				conn = getconnection(conn);
+				stmt = conn.prepareStatement(Util.DELFRIENDSELF);
+				stmt.setInt(1, id);
+				int count = stmt.executeUpdate();
+				if(count>0){
+					System.out.println("del self friend ok");
+					delselfOk = true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("del self friend query fail");
+			e.printStackTrace();
+		}
+		return delselfOk;
+	}		
+	
 }

@@ -210,7 +210,9 @@
 										<input type="hidden" id="userid" name="userid" value=<%=valueNid%>>
 										<button type="submit" class="btn btn-success btn-lg">Update</button>
 										<button type="reset" class="btn btn-danger btn-lg">Cancel</button>
-
+										<a
+									href="UserControler.do?type=<%=Util.USERDELETEBTN%>&<%=Util.USERID%>=<%=valueNid%>"
+									class="btn btn-warning btn-lg" data-toggle="modal"> 탈퇴	</a> 
 									</div>
 								</div>
 							</form>

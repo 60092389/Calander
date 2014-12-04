@@ -29,7 +29,7 @@
 <title>S CALENDAR</title>
 </head>
 <body>
-	<%@include file="./navigator.jsp"%>
+	<%@include file="./navigator.jsp"%>	
 
 	<%
 		ArrayList<User> friendList = (ArrayList<User>)request.getAttribute("friendList") ;					
@@ -66,7 +66,11 @@
 								<td><%=friendList.get(i).getU_id()%></td>							
 								<td><%=friendList.get(i).getName()%></td>
 								<td>
-									<a href="UserControler.do?type=" class= "btn btn-success">SHOWSCHEDULE</a>
+									<form  name="showfriendschedule" id="contactForm"
+										method="post" action="UserControler.do?type=<%=Util.SHOWFS%>">
+									<input type="hidden" name="<%=Util.FRIENDID%>" value="<%=friendList.get(i).getN_id() %>" />									
+									<button type="submit" class="btn btn-success">SHOW</button>
+									</form>
 								</td>
 								<td>
 									<a href="UserControler.do?type=<%=Util.DELFRIEND %>&<%=Util.FRIENDID%>=<%=friendList.get(i).getN_id()%>

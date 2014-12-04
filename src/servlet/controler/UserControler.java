@@ -311,10 +311,11 @@ public class UserControler extends SharedControler {
 		System.out.println("delete user start");
 		UserDAO userDao = new UserDAO();
 		int id = Integer.parseInt(request.getParameter(Util.USERID));
+		
 
-		if (userDao.deleteUser(id)) {
+		if ( deleteSelf(id) && userDao.deleteUser(id)) {
 			System.out.println("delete user ok");
-			goPage(request, response, Util.ADMINPATH);
+			goPage(request, response, Util.MAINPATH);
 		} else {
 			System.out.println("delete user fail");
 			response.setContentType("text/html; charset=UTF-8");
@@ -325,6 +326,18 @@ public class UserControler extends SharedControler {
 			// goPage(request, response, Util.ERRORPATH);
 		}
 
+	}
+
+	private boolean deleteSelf(int id) throws NamingException {
+		// TODO Auto-generated method stub
+		System.out.println("delete self start");
+		boolean delSefOk = false;
+		FriendDAO fDAO = new FriendDAO();
+		if(fDAO.deleteSelfFriend(id)){ 
+			delSefOk = true;
+		}
+		System.out.println("delete self:"+delSefOk);
+		return delSefOk;
 	}
 
 	private void loginUser(HttpServletRequest request,
@@ -389,14 +402,19 @@ public class UserControler extends SharedControler {
 		user.setU_id(inputId);
 		user.setName(inputName);
 
-		if (!checkUserId(userDao, user)
+		if (!userDao.hasUserId(user) && !user.getU_id().equals("")
+				&& user.getU_id().length() >= 4 && !user.getName().equals("")
 				&& checkUserPwd(inputPassword, inputPasswordConfirm)) {
 			user.setPassword(inputPassword);
 
 			if (userDao.createUser(user)) {
 				// giveSession(request, user);
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('가입 완료');history.go(-1);</script>");
+				out.flush();
 
-				goPage(request, response, Util.MAINPATH);
+				//goPage(request, response, Util.MAINPATH);
 			} else {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
@@ -426,11 +444,12 @@ public class UserControler extends SharedControler {
 			throws NamingException {
 		boolean isOk = false;
 		System.out.println("check user id");
+		System.out.println(userDao.hasUserId(user));
 		if (userDao.hasUserId(user) && !user.getU_id().equals("")
 				&& user.getU_id().length() >= 4) {
 			isOk = true;
 		}
-		System.out.println(isOk);
+		System.out.println("isok:"+isOk);
 		return isOk;
 	}
 

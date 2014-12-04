@@ -99,7 +99,7 @@ public class UserDAO extends JDBC {
 			System.out.println("get page conn ok");
 			stmt = conn.createStatement();
 			
-			rs = stmt.executeQuery("SELECT * FROM user ORDER BY n_id DESC LIMIT " + startPos+", "+numInPage);
+			rs = stmt.executeQuery("SELECT * FROM User ORDER BY n_id DESC LIMIT " + startPos+", "+numInPage);
 			
 			while(rs.next()) {
 				

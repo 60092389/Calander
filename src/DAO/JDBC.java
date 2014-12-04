@@ -47,7 +47,7 @@ public class JDBC {
 			conn = dataSource.getConnection();
 			System.out.println("connection ok");
 		} catch (SQLException e) {
-			System.out.println("오류");
+			System.out.println("jdbc sql 오류");
 			e.printStackTrace();
 		} 
 		
